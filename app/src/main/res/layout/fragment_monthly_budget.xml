@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.monthlybudget.MonthlyBudget">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/Budget_Total"
+            android:layout_width="51dp"
+            android:layout_height="27dp"
+            android:text="Total"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView16"
+            app:layout_constraintEnd_toEndOf="@+id/insurance_budget"
+            app:layout_constraintStart_toStartOf="@+id/insurance_budget"
+            app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+        <TextView
+            android:id="@+id/budget_Total"
+            android:layout_width="51dp"
+            android:layout_height="27dp"
+            android:text="Spent"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/Budget_Total"
+            app:layout_constraintEnd_toEndOf="@+id/insurance_spent"
+            app:layout_constraintStart_toEndOf="@+id/insurance_budget"
+            app:layout_constraintTop_toTopOf="@+id/Budget_Total" />
+
+        <EditText
+            android:id="@+id/utilities_budget"
+            android:layout_width="69dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="@+id/housing_budget"
+            app:layout_constraintTop_toBottomOf="@+id/housing_budget" />
+
+        <EditText
+            android:id="@+id/insurance_budget"
+            android:layout_width="69dp"
+            android:layout_height="40dp"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/utilities_budget"
+            app:layout_constraintStart_toStartOf="@+id/utilities_budget"
+            app:layout_constraintTop_toBottomOf="@+id/utilities_budget" />
+
+
+        <EditText
+            android:id="@+id/utilities_spent"
+            android:layout_width="69dp"
+            android:layout_height="40dp"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:inputType="number"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@+id/housing_spent"
+            app:layout_constraintStart_toStartOf="@+id/housing_spent"
+            app:layout_constraintTop_toBottomOf="@+id/housing_spent" />
+
+        <EditText
+            android:id="@+id/insurance_spent"
+            android:layout_width="69dp"
+            android:layout_height="40dp"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/utilities_spent"
+            app:layout_constraintStart_toStartOf="@+id/utilities_spent"
+            app:layout_constraintTop_toBottomOf="@+id/utilities_spent" />
+
+        <EditText
+            android:id="@+id/utilities_remains"
+            android:layout_width="69dp"
+            android:gravity="center"
+            android:layout_height="40dp"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:enabled="false"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/housing_remains"
+            app:layout_constraintStart_toStartOf="@+id/housing_remains"
+            app:layout_constraintTop_toBottomOf="@+id/housing_remains" />
+
+        <EditText
+            android:id="@+id/insurance_remains"
+            android:layout_width="69dp"
+            android:gravity="center"
+            android:layout_height="40dp"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:inputType="number"
+            android:enabled="false"
+            app:layout_constraintEnd_toEndOf="@+id/housing_remains"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/housing_remains"
+            app:layout_constraintTop_toBottomOf="@+id/utilities_remains" />
+
+        <EditText
+            android:id="@+id/housing_budget"
+            android:gravity="center"
+            android:layout_width="69dp"
+            android:layout_height="40dp"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/transport_budget"
+            app:layout_constraintStart_toStartOf="@+id/transport_budget"
+            app:layout_constraintTop_toBottomOf="@+id/transport_budget" />
+
+        <EditText
+            android:id="@+id/housing_spent"
+            android:layout_width="69dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/transport_spent"
+            app:layout_constraintStart_toStartOf="@+id/transport_spent"
+            app:layout_constraintTop_toBottomOf="@+id/transport_spent" />
+
+        <EditText
+            android:id="@+id/housing_remains"
+            android:layout_width="69dp"
+            android:layout_height="40dp"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:enabled="false"
+            android:gravity="center"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/transport_remains"
+            app:layout_constraintStart_toStartOf="@+id/transport_remains"
+            app:layout_constraintTop_toBottomOf="@+id/transport_remains" />
+
+        <EditText
+            android:id="@+id/transport_budget"
+            android:layout_width="69dp"
+            android:layout_height="40dp"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:inputType="number"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@+id/food_budget"
+            app:layout_constraintStart_toStartOf="@+id/food_budget"
+            app:layout_constraintTop_toBottomOf="@+id/food_budget" />
+
+        <EditText
+            android:id="@+id/transport_spent"
+            android:layout_width="69dp"
+            android:gravity="center"
+            android:layout_height="40dp"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/spent_food"
+            app:layout_constraintStart_toStartOf="@+id/spent_food"
+            app:layout_constraintTop_toBottomOf="@+id/spent_food" />
+
+        <EditText
+            android:id="@+id/transport_remains"
+            android:layout_width="69dp"
+            android:layout_height="40dp"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:enabled="false"
+            android:inputType="number"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@+id/remains"
+            app:layout_constraintStart_toStartOf="@+id/remains"
+            app:layout_constraintTop_toBottomOf="@+id/remains" />
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="32dp"
+            android:text="Budget Funds"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
+
+        <EditText
+            android:id="@+id/incomeinput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="104dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="72dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/money_logo"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/incomeinput"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/timeline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="January 1-31, 2022"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/forward_image"
+            app:layout_constraintHorizontal_bias="0.523"
+            app:layout_constraintStart_toEndOf="@+id/back_image_m"
+            app:layout_constraintTop_toBottomOf="@+id/incomeinput" />
+
+        <ImageView
+            android:id="@+id/back_image_m"
+            android:layout_width="24dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/left_budget"
+            app:layout_constraintBottom_toBottomOf="@+id/timeline"
+            app:layout_constraintStart_toStartOf="@+id/imageView9"
+            app:layout_constraintTop_toTopOf="@+id/timeline"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/forward_image"
+            android:layout_width="24dp"
+            android:layout_height="31dp"
+            android:src="@drawable/right_budget"
+            app:layout_constraintBottom_toBottomOf="@+id/timeline"
+            app:layout_constraintEnd_toEndOf="@+id/incomeinput"
+            app:layout_constraintTop_toTopOf="@+id/timeline"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="12dp"
+            android:text="Category"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/back_image_m" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Budget"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/textView9"
+            app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Spent"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView10"
+            app:layout_constraintStart_toEndOf="@+id/textView10"
+            app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Remains"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView11"
+            app:layout_constraintStart_toEndOf="@+id/textView11"
+            app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/food_budget" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Transport"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView13"
+            app:layout_constraintHorizontal_bias="0.184"
+            app:layout_constraintStart_toStartOf="@+id/textView13"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Housing"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+        <EditText
+            android:id="@+id/food_budget"
+            android:layout_width="69dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <EditText
+            android:id="@+id/spent_food"
+            android:layout_width="69dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="@+id/food_budget"
+            app:layout_constraintEnd_toEndOf="@+id/textView11"
+            app:layout_constraintHorizontal_bias="0.545"
+            app:layout_constraintStart_toStartOf="@+id/textView11"
+            app:layout_constraintTop_toTopOf="@+id/food_budget"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/remains"
+            android:layout_width="69dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/green_border_budget"
+            android:ems="10"
+            android:enabled="false"
+            android:gravity="center"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="@+id/spent_food"
+            app:layout_constraintStart_toEndOf="@+id/spent_food"
+            app:layout_constraintTop_toTopOf="@+id/spent_food" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Utilities"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Insurance"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:text="Total"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView15"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+        <TextView
+            android:id="@+id/budget_remains"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remains"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/budget_Total"
+            app:layout_constraintEnd_toEndOf="@+id/insurance_remains"
+            app:layout_constraintStart_toStartOf="@+id/insurance_remains"
+            app:layout_constraintTop_toTopOf="@+id/budget_Total" />
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Submit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/budget_Total" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

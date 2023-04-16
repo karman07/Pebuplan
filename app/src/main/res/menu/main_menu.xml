@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_budget"
+        android:icon="@drawable/ic_monthly"
+        android:title="Monthly Budget" />
+    <item
+        android:id="@+id/action_goals"
+        android:icon="@drawable/ic_plans"
+        android:title="Monthly Goals"/>
+    <item
+        android:id="@+id/action_bills"
+        android:icon="@drawable/ic_bills"
+        android:title="Monthly Bills"/>
+    <item
+        android:id="@+id/action_tracker"
+        android:icon="@drawable/ic_tracker"
+        android:title="Tracker"/>
+    <item
+        android:id="@+id/action_savings"
+        android:icon="@drawable/ic_savings"
+        android:title="Data Savings"/>
+
+</menu>
