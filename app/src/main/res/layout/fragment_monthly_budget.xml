@@ -324,6 +324,7 @@
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/transport_budget"
             app:layout_constraintEnd_toEndOf="@+id/textView9"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/food_budget" />
@@ -332,27 +333,27 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:text="Transport"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/housing_budget"
             app:layout_constraintEnd_toEndOf="@+id/textView13"
             app:layout_constraintHorizontal_bias="0.184"
             app:layout_constraintStart_toStartOf="@+id/textView13"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintTop_toTopOf="@+id/transport_budget" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="Housing"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/utilities_budget"
             app:layout_constraintStart_toStartOf="@+id/textView14"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            app:layout_constraintTop_toTopOf="@+id/housing_budget" />
 
         <EditText
             android:id="@+id/food_budget"
@@ -372,15 +373,12 @@
             android:id="@+id/spent_food"
             android:layout_width="69dp"
             android:layout_height="40dp"
-            android:layout_marginStart="20dp"
             android:background="@drawable/green_border_budget"
             android:ems="10"
             android:gravity="center"
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="@+id/food_budget"
-            app:layout_constraintEnd_toEndOf="@+id/textView11"
-            app:layout_constraintHorizontal_bias="0.545"
-            app:layout_constraintStart_toStartOf="@+id/textView11"
+            app:layout_constraintStart_toEndOf="@+id/food_budget"
             app:layout_constraintTop_toTopOf="@+id/food_budget"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -388,13 +386,13 @@
             android:id="@+id/remains"
             android:layout_width="69dp"
             android:layout_height="40dp"
-            android:layout_marginStart="10dp"
             android:background="@drawable/green_border_budget"
             android:ems="10"
             android:enabled="false"
             android:gravity="center"
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="@+id/spent_food"
+            app:layout_constraintEnd_toEndOf="@+id/textView12"
             app:layout_constraintStart_toEndOf="@+id/spent_food"
             app:layout_constraintTop_toTopOf="@+id/spent_food" />
 
@@ -402,25 +400,25 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="Utilities"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/utilities_budget"
             app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toTopOf="@+id/utilities_budget" />
 
         <TextView
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="Insurance"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/insurance_budget"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintTop_toBottomOf="@+id/utilities_budget" />
 
         <TextView
             android:id="@+id/textView16"

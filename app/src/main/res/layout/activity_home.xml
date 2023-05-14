@@ -18,6 +18,10 @@
         android:elevation="16dp"
         app:headerLayout="@layout/drawerheader"
         app:menu="@menu/main_menu"/>
+    <FrameLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -424,4 +428,5 @@
         </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

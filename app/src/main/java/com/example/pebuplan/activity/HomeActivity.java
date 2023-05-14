@@ -17,6 +17,8 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceView;
 import android.view.View;
@@ -32,6 +34,7 @@ import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.material.navigation.NavigationView;
+import com.onesignal.OneSignal;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -43,10 +46,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawer;
 
+    Intent intent;
     PieChart pieChart;
     private CardView m_budget, f_goals, m_bills, i_tracker, d_savings;
 
     TextView income_txt, expenses_txt, savings_txt;
+
+    private NavigationView navigationView;
 
 
     @Override
@@ -54,7 +60,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+/*        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+
+        OneSignal.initWithContext(this);
+        OneSignal.setAppId("c803c1d8-6b5e-4f37-a6a5-604399e347ab");*/
+
         SharedPreferences prefs = getSharedPreferences("plan", Context.MODE_PRIVATE);
+
+        OneSignal.promptForPushNotifications();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,15 +89,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         videoView.setVideoPath(videoPath);
 
         drawer = findViewById(R.id.drawer_layout);
-        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        intent = new Intent(HomeActivity.this, MainActivity.class);
+        navigationView = findViewById(R.id.navigation_view);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.drawer_open, R.string.drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         drawer.closeDrawer(GravityCompat.START);
+
+        navigationView.setNavigationItemSelectedListener(this);
 
         String income = prefs.getString("Total_Budget","0").replace("₱", "");
         String expenses = prefs.getString("Total_Spent","0").replace("₱", "");
@@ -202,16 +217,55 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d("1", String.valueOf(menu));
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                drawer.openDrawer(GravityCompat.START);
+            }
+            return true;
+        }
+        Log.d("1", String.valueOf(item));
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_budget:
-                Toast.makeText(this,"Hi Budget", Toast.LENGTH_LONG).show();
-                break;
-            case R.id.action_goals:
-                Toast.makeText(this,"Hi Goals", Toast.LENGTH_LONG).show();
-                break;
+        int id = item.getItemId();
+
+        if (id == R.id.action_budget) {
+            intent.putExtra("FragDetails", "m_budget");
+            startActivity(intent);
+        } else if (id == R.id.action_goals) {
+            intent.putExtra("FragDetails", "f_goals");
+            startActivity(intent);
+        } else if (id == R.id.action_tracker) {
+            intent.putExtra("FragDetails", "i_tracker");
+            startActivity(intent);
+        } else if (id == R.id.action_savings) {
+            intent.putExtra("FragDetails", "d_savings");
+            startActivity(intent);
+        } else if (id == R.id.nav_security) {
+            intent.putExtra("FragDetails", "nav_security");
+            startActivity(intent);
+        } else if (id == R.id.nav_remainder){
+            intent.putExtra("FragDetails", "nav_remainder");
+            startActivity(intent);
+        } else if (id == R.id.nav_h_and_p) {
+            intent.putExtra("FragDetails", "nav_h_and_p");
+            startActivity(intent);
         }
 
+        Log.d("1", String.valueOf(id));
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

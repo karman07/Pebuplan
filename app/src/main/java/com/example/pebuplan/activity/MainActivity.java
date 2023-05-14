@@ -14,6 +14,9 @@ import com.example.pebuplan.fragments.fgoal.FGoals;
 import com.example.pebuplan.fragments.monthlybills.MainBillsFragment;
 import com.example.pebuplan.fragments.monthlybudget.MonthlyBudget;
 import com.example.pebuplan.fragments.savings.SavingFragment;
+import com.example.pebuplan.fragments.settings.HelpFragment;
+import com.example.pebuplan.fragments.settings.NotificationsFragment;
+import com.example.pebuplan.fragments.settings.SecurityFragment;
 import com.example.pebuplan.fragments.tracker.TrackerMainFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,7 +42,16 @@ public class MainActivity extends AppCompatActivity {
         }else if(fragDetails.equals("m_bills")){
             MainBillsFragment mainBillsFragment = new MainBillsFragment();
             transaction(mainBillsFragment);
-        }else{
+        } else if(fragDetails.equals("nav_security")) {
+            SecurityFragment fragment = new SecurityFragment();
+            transaction(fragment);
+        } else if (fragDetails.equals("nav_remainder")) {
+            NotificationsFragment fragment = new NotificationsFragment();
+            transaction(fragment);
+        } else if (fragDetails.equals("nav_h_and_p")) {
+            HelpFragment fragment = new HelpFragment();
+            transaction(fragment);
+        } else{
             SavingFragment savingFragment = new SavingFragment();
             transaction(savingFragment);
         }

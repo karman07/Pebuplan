@@ -1,4 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
     <item
         android:id="@+id/action_budget"
         android:icon="@drawable/ic_monthly"
@@ -19,5 +20,27 @@
         android:id="@+id/action_savings"
         android:icon="@drawable/ic_savings"
         android:title="Data Savings"/>
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings">
 
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_security"
+                    android:title="Security" />
+
+                <item
+                    android:id="@+id/nav_remainder"
+                    android:title="Notifications" />
+
+                <item
+                    android:id="@+id/nav_h_and_p"
+                    android:title="Help and Support" />
+            </group>
+        </menu>
+
+    </item>
+    </group>
 </menu>
