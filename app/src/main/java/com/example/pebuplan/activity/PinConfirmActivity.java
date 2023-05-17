@@ -23,6 +23,8 @@ public class PinConfirmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_confirm);
 
+        TextView hide_text = findViewById(R.id.textView34);
+
         TextView pin_Code_box = findViewById(R.id.pin_Code_box);
         Button sign_in = findViewById(R.id.button4);
 
@@ -41,7 +43,25 @@ public class PinConfirmActivity extends AppCompatActivity {
 
         String value = sharedPref.getString("pincode", "default_value");
 
-        Log.d("1",value);
+        String p_tick = sharedPref.getString("p_tick", "default_value");
+        String finger_tick = sharedPref.getString("finger_tick", "default_value");
+
+
+        if(p_tick.equals("false")){
+            hide_text.setVisibility(View.INVISIBLE);
+            pin_Code_box.setVisibility(View.INVISIBLE);
+        }
+
+        if(finger_tick.equals("false")){
+            signwithfinger.setVisibility(View.INVISIBLE);
+        }
+
+        if(p_tick.equals("false") && finger_tick.equals("false") ){
+            Intent intent = new Intent(PinConfirmActivity.this, HomeActivity.class);
+            startActivity(intent);
+        }
+
+        //Log.d("1",value);
 
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override

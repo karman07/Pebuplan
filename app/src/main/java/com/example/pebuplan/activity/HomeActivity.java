@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceView;
@@ -44,7 +45,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private VideoView videoView;
     private SeekBar seekBar;
 
-    private DrawerLayout drawer;
+    public DrawerLayout drawer;
 
     Intent intent;
     PieChart pieChart;
@@ -54,16 +55,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private NavigationView navigationView;
 
+    ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-/*        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
 
         OneSignal.initWithContext(this);
-        OneSignal.setAppId("c803c1d8-6b5e-4f37-a6a5-604399e347ab");*/
+        OneSignal.setAppId("c803c1d8-6b5e-4f37-a6a5-604399e347ab");
 
         SharedPreferences prefs = getSharedPreferences("plan", Context.MODE_PRIVATE);
 
@@ -92,14 +94,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         intent = new Intent(HomeActivity.this, MainActivity.class);
         navigationView = findViewById(R.id.navigation_view);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.drawer_open, R.string.drawer_close);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.drawer_open,R.string.drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+       // Log.d("To check",String.valueOf(drawer.isDrawerOpen(GravityCompat.START)));
+         Log.d("hi","1");
         drawer.closeDrawer(GravityCompat.START);
 
-        navigationView.setNavigationItemSelectedListener(this);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         String income = prefs.getString("Total_Budget","0").replace("₱", "");
         String expenses = prefs.getString("Total_Spent","0").replace("₱", "");
@@ -223,20 +229,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            if (drawer.isDrawerOpen(GravityCompat.START)) {
-                drawer.closeDrawer(GravityCompat.START);
-            } else {
-                drawer.openDrawer(GravityCompat.START);
-            }
+
+        if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
-        Log.d("1", String.valueOf(item));
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -266,7 +267,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
 
         Log.d("1", String.valueOf(id));
-        drawer.closeDrawer(GravityCompat.START);
+        //drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }

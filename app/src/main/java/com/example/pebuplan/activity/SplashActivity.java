@@ -25,11 +25,13 @@ public class SplashActivity extends AppCompatActivity {
 
         String value = sharedPref.getString("login", "default_value");
 
+
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if(value.equals("yes")) {
-                    Intent intent = new Intent(SplashActivity.this, PinActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, PinConfirmActivity.class);
                     startActivity(intent);
                     finish();
                 }else{

@@ -26,13 +26,15 @@ public class PinActivity extends AppCompatActivity {
         EditText pinconfirm = findViewById(R.id.pin_Code_confirm);
 
         SharedPreferences preferences = getSharedPreferences("plan", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(pincode.getText().toString().equals(pinconfirm.getText().toString()) && !pincode.getText().toString().isEmpty()){
                     Intent intent = new Intent(PinActivity.this, PinConfirmActivity.class);
-                    SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("pincode", pincode.getText().toString());
                     editor.apply();
                     startActivity(intent);
