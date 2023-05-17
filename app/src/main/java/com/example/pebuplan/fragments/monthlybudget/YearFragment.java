@@ -1,5 +1,15 @@
 package com.example.pebuplan.fragments.monthlybudget;
 
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.pebuplan.R;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,12 +31,14 @@ import com.example.pebuplan.R;
 import com.example.pebuplan.activity.HomeActivity;
 
 import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
-public class MonthlyBudget extends Fragment {
+public class YearFragment extends Fragment {
 
     EditText food_budget,transport_budget, housing_budget, utilities_budget, insurance_budget;
     EditText food_spent,transport_spent, housing_spent, utilities_spent, insurance_spent;
@@ -42,9 +54,9 @@ public class MonthlyBudget extends Fragment {
     ArrayList<String> budget_text = new ArrayList<>();
     ArrayList<String> spent_text = new ArrayList<>();
 
-     ImageView back_image;
+    //ImageView back_image;
 
-     ImageView back, forward;
+    ImageView back, forward;
 
     boolean list1GreaterThanList2 = true;
 
@@ -58,7 +70,7 @@ public class MonthlyBudget extends Fragment {
     SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
 
     EditText[] budgetList, spentList, remainsList;
-    public MonthlyBudget() {
+    public YearFragment() {
 
     }
 
@@ -78,9 +90,10 @@ public class MonthlyBudget extends Fragment {
         int year = calendar.get(Calendar.YEAR);
 
 
-        View view = inflater.inflate(R.layout.fragment_monthly_budget, container, false);
+        View view = inflater.inflate(R.layout.fragment_day, container, false);
         SharedPreferences preferences = getActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
 
+        Date currentDate = new Date();
 
         food_budget = view.findViewById(R.id.food_budget);
         transport_budget = view.findViewById(R.id.transport_budget);
@@ -122,8 +135,7 @@ public class MonthlyBudget extends Fragment {
         back = view.findViewById(R.id.back_image_m);
         forward = view.findViewById(R.id.forward_image);
 
-        date.setText(month + "\t1-30\t" + year);
-
+        date.setText(String.valueOf(year));
 
 
         submit_btn.setOnClickListener(new View.OnClickListener() {
@@ -206,7 +218,7 @@ public class MonthlyBudget extends Fragment {
             }
         });
 
-/*        TextView titleView = view.findViewById(R.id.title);
+        /*TextView titleView = view.findViewById(R.id.title);
         titleView.setText("Monthly Budget");*/
 
 
@@ -225,7 +237,7 @@ public class MonthlyBudget extends Fragment {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
                 String month = dateFormat.format(calendar.getTime());
                 int year = calendar.get(Calendar.YEAR);
-                date.setText(month + "\t1-30\t" + year);
+                date.setText(String.valueOf(year));
                 clear();
             }
         });
@@ -233,11 +245,11 @@ public class MonthlyBudget extends Fragment {
         forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calendar.add(Calendar.MONTH, 1);
+                calendar.add(Calendar.YEAR, 1);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
                 String month = dateFormat.format(calendar.getTime());
                 int year = calendar.get(Calendar.YEAR);
-                date.setText(month + "\t1-30\t" + year);
+                date.setText(String.valueOf(year));
                 clear();
             }
         });

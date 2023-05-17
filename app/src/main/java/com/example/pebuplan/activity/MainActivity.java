@@ -12,11 +12,13 @@ import android.widget.FrameLayout;
 import com.example.pebuplan.R;
 import com.example.pebuplan.fragments.fgoal.FGoals;
 import com.example.pebuplan.fragments.monthlybills.MainBillsFragment;
+import com.example.pebuplan.fragments.monthlybudget.BudgetFragment;
 import com.example.pebuplan.fragments.monthlybudget.MonthlyBudget;
 import com.example.pebuplan.fragments.savings.SavingFragment;
 import com.example.pebuplan.fragments.settings.HelpFragment;
 import com.example.pebuplan.fragments.settings.NotificationsFragment;
 import com.example.pebuplan.fragments.settings.SecurityFragment;
+import com.example.pebuplan.fragments.tipids.TipidTips;
 import com.example.pebuplan.fragments.tracker.TrackerMainFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if(fragDetails.equals("m_budget")){
-            MonthlyBudget fragment = new MonthlyBudget();
+            BudgetFragment fragment = new BudgetFragment();
             transaction(fragment);
         } else if (fragDetails.equals("f_goals")) {
             FGoals fragment = new FGoals();
@@ -50,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
             transaction(fragment);
         } else if (fragDetails.equals("nav_h_and_p")) {
             HelpFragment fragment = new HelpFragment();
+            transaction(fragment);
+        } else if (fragDetails.equals("tips")) {
+            TipidTips fragment = new TipidTips();
             transaction(fragment);
         } else{
             SavingFragment savingFragment = new SavingFragment();

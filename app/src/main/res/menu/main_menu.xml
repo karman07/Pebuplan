@@ -1,27 +1,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_budget"
-        android:icon="@drawable/ic_monthly"
+        android:icon="@drawable/f"
         android:title="Monthly Budget" />
     <item
         android:id="@+id/action_goals"
-        android:icon="@drawable/ic_plans"
+        android:icon="@drawable/f1"
         android:title="Monthly Goals"/>
     <item
         android:id="@+id/action_bills"
-        android:icon="@drawable/ic_bills"
+        android:icon="@drawable/f3"
         android:title="Monthly Bills"/>
     <item
         android:id="@+id/action_tracker"
-        android:icon="@drawable/ic_tracker"
+        android:icon="@drawable/f4"
         android:title="Tracker"/>
     <item
         android:id="@+id/action_savings"
-        android:icon="@drawable/ic_savings"
+        android:icon="@drawable/f5"
         android:title="Data Savings"/>
+
+    <item
+        android:id="@+id/action_tips"
+        android:icon="@drawable/f6"
+        android:title="Tipid Tips"/>
     <item
         android:id="@+id/action_settings"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/f7"
         android:title="Settings">
 
         <menu>

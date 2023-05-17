@@ -64,14 +64,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
 
-        OneSignal.initWithContext(this);
-        OneSignal.setAppId("c803c1d8-6b5e-4f37-a6a5-604399e347ab");
 
         SharedPreferences prefs = getSharedPreferences("plan", Context.MODE_PRIVATE);
+        String noti_data = prefs.getString("bill_reminder", "false");
 
-        OneSignal.promptForPushNotifications();
+        if(noti_data.equals("true")) {
+            OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+
+            OneSignal.initWithContext(this);
+            OneSignal.setAppId("c803c1d8-6b5e-4f37-a6a5-604399e347ab");
+            OneSignal.promptForPushNotifications();
+        }
+
 
 
         m_budget = findViewById(R.id.m_budget);
@@ -103,11 +108,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        intent = new Intent(HomeActivity.this, MainActivity.class);
        // Log.d("To check",String.valueOf(drawer.isDrawerOpen(GravityCompat.START)));
          Log.d("hi","1");
         //drawerLayout.close();
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         String income = prefs.getString("Total_Budget","0").replace("₱", "");
         String expenses = prefs.getString("Total_Spent","0").replace("₱", "");
@@ -234,7 +240,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
@@ -265,6 +270,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         } else if (id == R.id.nav_h_and_p) {
             intent.putExtra("FragDetails", "nav_h_and_p");
+            startActivity(intent);
+        }else{
+            intent.putExtra("FragDetails", "tips");
             startActivity(intent);
         }
 
