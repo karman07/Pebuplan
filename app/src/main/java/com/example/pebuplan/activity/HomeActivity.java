@@ -45,7 +45,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private VideoView videoView;
     private SeekBar seekBar;
 
-    public DrawerLayout drawer;
+    //public DrawerLayout drawer;
 
     Intent intent;
     PieChart pieChart;
@@ -53,9 +53,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     TextView income_txt, expenses_txt, savings_txt;
 
-    private NavigationView navigationView;
+    //private NavigationView navigationView;
 
-    ActionBarDrawerToggle toggle;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +73,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         OneSignal.promptForPushNotifications();
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         m_budget = findViewById(R.id.m_budget);
         f_goals = findViewById(R.id.f_goals);
@@ -90,20 +90,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.video1;
         videoView.setVideoPath(videoPath);
 
-        drawer = findViewById(R.id.drawer_layout);
-        intent = new Intent(HomeActivity.this, MainActivity.class);
-        navigationView = findViewById(R.id.navigation_view);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
+
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.drawer_open,R.string.drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
 
        // Log.d("To check",String.valueOf(drawer.isDrawerOpen(GravityCompat.START)));
          Log.d("hi","1");
-        drawer.closeDrawer(GravityCompat.START);
+        //drawerLayout.close();
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -215,8 +217,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -233,7 +235,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if (toggle.onOptionsItemSelected(item)) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -267,7 +269,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
 
         Log.d("1", String.valueOf(id));
-        //drawer.closeDrawer(GravityCompat.START);
+        //drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 }

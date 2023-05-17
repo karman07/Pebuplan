@@ -8,23 +8,20 @@
     android:layout_height="match_parent"
     tools:context=".activity.HomeActivity">
 
-    <FrameLayout
-        android:id="@+id/main_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        android:clickable="true"
+        android:elevation="16dp"
+        app:headerLayout="@layout/drawerheader"
+        app:menu="@menu/main_menu" />
 
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigation_view"
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:elevation="16dp"
-            app:headerLayout="@layout/drawerheader"
-            app:menu="@menu/main_menu" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="visible">
 
 
@@ -427,5 +424,5 @@
             </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
+
 </androidx.drawerlayout.widget.DrawerLayout>
