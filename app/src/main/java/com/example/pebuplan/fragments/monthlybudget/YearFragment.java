@@ -86,7 +86,7 @@ public class YearFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        String month = dateFormat.format(calendar.getTime());
+        String month = String.valueOf(calendar.get(Calendar.MONTH));
         int year = calendar.get(Calendar.YEAR);
 
 

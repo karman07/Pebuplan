@@ -37,7 +37,8 @@
             android:layout_marginTop="15dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp"
-            app:layout_constraintStart_toStartOf="@+id/textView48"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView48">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,6 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:padding="10dp"
                     android:text="1. Determine your income: Calculate your monthly income, including your salary or wages, any bonuses or commissions, and any other sources of income.\n\n2.List your expenses: Make a list of all your monthly expenses, including rent/mortgage payments, utilities, groceries, transportation, insurance, entertainment, and any other expenses you have.\n\n3.Categorize your expenses: Categorize your expenses into fixed expenses (such as rent/mortgage payments and insurance) and variable expenses (such as groceries and entertainment).\n\n4.Determine your priorities: Decide which expenses are essential and which ones you can reduce or eliminate.\n\n5.Create your budget: Use a budgeting tool or spreadsheet to organize your income and expenses. Start by allocating money to your fixed expenses, then prioritize your variable expenses, and finally, allocate money to your savings goals."
                     android:textSize="9sp"
                     android:textStyle="bold"
@@ -83,6 +85,7 @@
                     android:id="@+id/open_budget"
                     android:layout_width="43dp"
                     android:layout_height="20dp"
+                    android:padding="10dp"
                     android:src="@drawable/down_arrow"
                     app:layout_constraintBottom_toBottomOf="@+id/textView47"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -116,6 +119,7 @@
                     android:text="To organize your bills, gather them all in one place and create a system for tracking due dates and payments, such as a calendar or spreadsheet. Set up automatic payments for recurring bills and consider going paperless to reduce clutter."
                     android:textSize="9sp"
                     android:textStyle="bold"
+                    android:padding="10dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/textView52"
                     app:layout_constraintStart_toStartOf="@+id/textView52"
@@ -175,6 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:padding="10dp"
                     android:text="To easily track your expenses, use a budgeting app, keep all your receipts, create a spreadsheet, set a budget and regularly review and categorize your expenses."
                     android:textSize="9sp"
                     android:textStyle="bold"

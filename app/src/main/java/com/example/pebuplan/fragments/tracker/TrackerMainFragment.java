@@ -69,12 +69,12 @@ public class TrackerMainFragment extends Fragment {
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
-        String month = dateFormat.format(calendar.getTime());
-        int year = calendar.get(Calendar.YEAR);
+//        String month = dateFormat.format(calendar.getTime());
+        String month = String.valueOf(calendar.get(Calendar.MONTH));
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
 
-        String value = sharedPref.getString(month + "\t1-30\t" + year + "_spent", "0,0,0,0,0,0");
+        String value = sharedPref.getString(month + "_spent", "0,0,0,0,0,0");
 
         String[] numberList = value.split(", ");
         String[] colours = {"#FF0000","#00ff00","#0000FF","#FFFF00","#FFA500"};

@@ -39,7 +39,7 @@ public class BudgetFragment extends Fragment {
 
         TextView title = view.findViewById(R.id.title);
 
-        title.setText("Budget");
+        title.setText("Budget Planner");
 
         ImageView back_image = view.findViewById(R.id.back_image);
 

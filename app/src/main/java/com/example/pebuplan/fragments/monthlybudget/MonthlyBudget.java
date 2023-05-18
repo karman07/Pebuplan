@@ -76,6 +76,7 @@ public class MonthlyBudget extends Fragment {
 
         String month = dateFormat.format(calendar.getTime());
         int year = calendar.get(Calendar.YEAR);
+        int week = calendar.get(Calendar.WEEK_OF_YEAR);
 
 
         View view = inflater.inflate(R.layout.fragment_monthly_budget, container, false);
@@ -122,7 +123,7 @@ public class MonthlyBudget extends Fragment {
         back = view.findViewById(R.id.back_image_m);
         forward = view.findViewById(R.id.forward_image);
 
-        date.setText(month + "\t1-30\t" + year);
+        date.setText(String.valueOf(week));
 
 
 
@@ -221,11 +222,11 @@ public class MonthlyBudget extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calendar.add(Calendar.MONTH, -1);
+                calendar.add(Calendar.WEEK_OF_YEAR, -1);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
                 String month = dateFormat.format(calendar.getTime());
-                int year = calendar.get(Calendar.YEAR);
-                date.setText(month + "\t1-30\t" + year);
+                int week = calendar.get(Calendar.WEEK_OF_YEAR);
+                date.setText(String.valueOf(week));
                 clear();
             }
         });
@@ -233,11 +234,11 @@ public class MonthlyBudget extends Fragment {
         forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calendar.add(Calendar.MONTH, 1);
+                calendar.add(Calendar.WEEK_OF_YEAR, 1);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
                 String month = dateFormat.format(calendar.getTime());
-                int year = calendar.get(Calendar.YEAR);
-                date.setText(month + "\t1-30\t" + year);
+                int week = calendar.get(Calendar.WEEK_OF_YEAR);
+                date.setText(week);
                 clear();
             }
         });
