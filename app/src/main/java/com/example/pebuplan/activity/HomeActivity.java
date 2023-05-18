@@ -92,8 +92,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         videoView = findViewById(R.id.video_view);
         seekBar = findViewById(R.id.seek_bar);
         pieChart = findViewById(R.id.piechart);
-        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.video1;
-        videoView.setVideoPath(videoPath);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -107,6 +105,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.video;
+        videoView.setVideoPath(videoPath);
 
         intent = new Intent(HomeActivity.this, MainActivity.class);
        // Log.d("To check",String.valueOf(drawer.isDrawerOpen(GravityCompat.START)));

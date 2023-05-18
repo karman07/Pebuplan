@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import com.example.pebuplan.R;
 
@@ -24,8 +25,6 @@ public class SplashActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
 
         String value = sharedPref.getString("login", "default_value");
-
-
 
         new Handler().postDelayed(new Runnable() {
             @Override

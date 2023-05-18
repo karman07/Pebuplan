@@ -73,7 +73,7 @@ public class PinConfirmActivity extends AppCompatActivity {
                     startActivity(intent);
                 }else{
                     Log.d("2", pin_Code_box.getText().toString());
-                    pin_Code_box.setError("Error: Error is invalid");
+                    pin_Code_box.setError("Error: Text is invalid");
                 }
             }
         });
