@@ -123,6 +123,7 @@ public class TrackerMainFragment extends Fragment {
             private void income() {
                 pieChart.clearChart();
                 for (int i = 0; i < numberList.length; i++) {
+//                    Log.d("Hi",String.valueOf(i));
                     pieChart.addPieSlice(new PieModel(
                             "Food",
                             Integer.parseInt(numberList[i]),

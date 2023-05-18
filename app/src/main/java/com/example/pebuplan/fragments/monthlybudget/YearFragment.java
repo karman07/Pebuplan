@@ -90,7 +90,7 @@ public class YearFragment extends Fragment {
         int year = calendar.get(Calendar.YEAR);
 
 
-        View view = inflater.inflate(R.layout.fragment_day, container, false);
+        View view = inflater.inflate(R.layout.fragment_year, container, false);
         SharedPreferences preferences = getActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
 
         Date currentDate = new Date();
@@ -135,7 +135,7 @@ public class YearFragment extends Fragment {
         back = view.findViewById(R.id.back_image_m);
         forward = view.findViewById(R.id.forward_image);
 
-        date.setText(String.valueOf(year));
+        date.setText(month);
 
 
         submit_btn.setOnClickListener(new View.OnClickListener() {
@@ -235,9 +235,9 @@ public class YearFragment extends Fragment {
             public void onClick(View view) {
                 calendar.add(Calendar.MONTH, -1);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
-                String month = dateFormat.format(calendar.getTime());
+                String month = String.valueOf(calendar.get(Calendar.MONTH));
                 int year = calendar.get(Calendar.YEAR);
-                date.setText(String.valueOf(year));
+                date.setText(month);
                 clear();
             }
         });
@@ -245,11 +245,11 @@ public class YearFragment extends Fragment {
         forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calendar.add(Calendar.YEAR, 1);
+                calendar.add(Calendar.MONTH, 1);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
-                String month = dateFormat.format(calendar.getTime());
+                String month = String.valueOf(calendar.get(Calendar.MONTH));
                 int year = calendar.get(Calendar.YEAR);
-                date.setText(String.valueOf(year));
+                date.setText(month);
                 clear();
             }
         });

@@ -22,16 +22,9 @@ public class BudgetFragment extends Fragment {
 
 
     public BudgetFragment() {
-        // Required empty public constructor
+
     }
 
-
-    public static BudgetFragment newInstance(String param1, String param2) {
-        BudgetFragment fragment = new BudgetFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,13 +60,13 @@ public class BudgetFragment extends Fragment {
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {
                 case 0:
-                    tab.setText("Day");
+                    tab.setText("Daily");
                     break;
                 case 1:
-                    tab.setText("Month");
+                    tab.setText("Weekly");
                     break;
                 default:
-                    tab.setText("Year");
+                    tab.setText("Monthly");
                     break;
             }
         }).attach();
