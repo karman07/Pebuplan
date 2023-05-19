@@ -1,8 +1,9 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_budget"
         android:icon="@drawable/f"
-        android:title="Monthly Budget" />
+        android:title="Budget Planner" />
     <item
         android:id="@+id/action_goals"
         android:icon="@drawable/f1"
@@ -27,21 +28,20 @@
     <item
         android:id="@+id/action_settings"
         android:icon="@drawable/f7"
-        android:title="Settings">
-
+        android:title="Settings"
+        app:showAsAction="always">
         <menu>
-                <item
-                    android:id="@+id/nav_security"
-                    android:title="Security" />
+            <item
+                android:id="@+id/nav_security"
+                android:title="Security" />
 
-                <item
-                    android:id="@+id/nav_remainder"
-                    android:title="Notifications" />
+            <item
+                android:id="@+id/nav_remainder"
+                android:title="Notifications" />
 
-                <item
-                    android:id="@+id/nav_h_and_p"
-                    android:title="Help and Support" />
+            <item
+                android:id="@+id/nav_h_and_p"
+                android:title="Help and Support" />
         </menu>
-
     </item>
 </menu>

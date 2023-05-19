@@ -202,6 +202,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -390,7 +391,6 @@
             android:gravity="center"
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="@+id/spent_food"
-            app:layout_constraintEnd_toEndOf="@+id/textView12"
             app:layout_constraintStart_toEndOf="@+id/spent_food"
             app:layout_constraintTop_toTopOf="@+id/spent_food" />
 

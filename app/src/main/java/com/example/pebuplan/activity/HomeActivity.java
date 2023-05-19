@@ -174,9 +174,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         Color.parseColor("#22A1E2")));
 
 
-        income_txt.setText("Budget : " + income);
-        expenses_txt.setText("Spent : " + expenses);
-        savings_txt.setText("Savings : " + savings);
+        income_txt.setText("INCOME : " + income);
+        expenses_txt.setText("EXPENSES : " + expenses);
+        savings_txt.setText("SAVINGS : " + savings);
 
 
         m_budget.setOnClickListener(new View.OnClickListener() {
@@ -230,12 +230,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
+/*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d("1", String.valueOf(menu));
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
-    }
+    }*/
 
 
     @Override
