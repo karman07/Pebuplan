@@ -6,9 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".fragments.settings.HelpFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+
+
 
         <include
             android:id="@+id/include3"
@@ -52,7 +62,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:padding="10dp"
-                    android:text="1. Determine your income: Calculate your monthly income, including your salary or wages, any bonuses or commissions, and any other sources of income.\n\n2.List your expenses: Make a list of all your monthly expenses, including rent/mortgage payments, utilities, groceries, transportation, insurance, entertainment, and any other expenses you have.\n\n3.Categorize your expenses: Categorize your expenses into fixed expenses (such as rent/mortgage payments and insurance) and variable expenses (such as groceries and entertainment).\n\n4.Determine your priorities: Decide which expenses are essential and which ones you can reduce or eliminate.\n\n5.Create your budget: Use a budgeting tool or spreadsheet to organize your income and expenses. Start by allocating money to your fixed expenses, then prioritize your variable expenses, and finally, allocate money to your savings goals."
+                    android:text="
+Step 1: Set the day, week and month\n
+Step 2: Input Category\n
+* Input the things you need to budget like food, electricity, water, house/rent and gasoline.\n
+Step 3: Input Amount\n
+* Input your amount budget.\n
+Step 4: Cash, credit, need and want\n
+* Choose and put a check sign if it is cash, credit, need or want.\n
+Step 5: Total expenses and remains\n
+* The total will automatically computed.
+Step 6: Submit"
                     android:textSize="9sp"
                     android:textStyle="bold"
                     android:visibility="gone"
@@ -85,7 +105,6 @@
                     android:id="@+id/open_budget"
                     android:layout_width="43dp"
                     android:layout_height="20dp"
-                    android:padding="10dp"
                     android:src="@drawable/down_arrow"
                     app:layout_constraintBottom_toBottomOf="@+id/textView47"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -116,10 +135,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="To organize your bills, gather them all in one place and create a system for tracking due dates and payments, such as a calendar or spreadsheet. Set up automatic payments for recurring bills and consider going paperless to reduce clutter."
+                    android:text=" Step 1: Input the amount and category of all bills you pay\n Step 2: Select a date\n
+
+Step 3: Watch the amount and percentage of income and expenses\n
+* When you enter an income and expenses, keep track of how much is left behind in category to avoid overspending.\n
+
+Step 4: Automate bills review\n
+* The date, category, amount and paid is automatically placed. Set the paid if the bill is already done.\n
+
+Step 5: Keep paying attention (Set the reminder)\n
+* Monitor payments to ensure enough money and check the bills to avoid due date of bills."
                     android:textSize="9sp"
                     android:textStyle="bold"
-                    android:padding="10dp"
+                    android:padding="12dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/textView52"
                     app:layout_constraintStart_toStartOf="@+id/textView52"
@@ -180,7 +208,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:padding="10dp"
-                    android:text="To easily track your expenses, use a budgeting app, keep all your receipts, create a spreadsheet, set a budget and regularly review and categorize your expenses."
+                    android:text="There are 5 easy steps you need to take.\n
+
+Step 1: Record your income and expenses every month, in app\n
+* This will help you keep up with where and how much you are spending.\n
+
+Step 2: Category of expenses\n
+* Categorize expenses (Food, Electricity, Water, House/Rent and Gasoline)\n
+
+Step 3: Watch the amount and percentage of income and expenses\n
+* When you enter an income and expenses, keep track of how much is left behind in category to avoid overspending.\n
+
+Step 4: Make adjustments\n
+* You should cut back on unnecessary things to ensure that your income and expenses are in line with your living budget.\n
+
+Step 5: Set monthly check-ins\n
+* Make sure your income minus expenses and savings equals zero. If not, organize your expenses and savings before budgeting for the coming month.\n
+
+Organizing and tracking income and expenses isn't about not spending any money, it's about choosing how to spend based on what's important to you. This gives an accurate picture of where your money is going and where you want it to go instead."
                     android:textSize="9sp"
                     android:textStyle="bold"
                     android:visibility="gone"
@@ -223,6 +268,7 @@
         </androidx.cardview.widget.CardView>
 
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

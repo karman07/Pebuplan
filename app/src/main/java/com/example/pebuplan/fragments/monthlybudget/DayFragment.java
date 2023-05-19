@@ -245,7 +245,7 @@ public class DayFragment extends Fragment {
         forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calendar.add(Calendar.DAY_OF_MONTH, -1);
+                calendar.add(Calendar.DAY_OF_MONTH, 1);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
                 String month = dateFormat.format(calendar.getTime());
                 int day = calendar.get(Calendar.DAY_OF_MONTH);

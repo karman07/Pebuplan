@@ -238,7 +238,7 @@ public class MonthlyBudget extends Fragment {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
                 String month = dateFormat.format(calendar.getTime());
                 int week = calendar.get(Calendar.WEEK_OF_YEAR);
-                date.setText(week);
+                date.setText(String.valueOf(week));
                 clear();
             }
         });

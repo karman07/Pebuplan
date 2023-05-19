@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.example.pebuplan.R;
 import com.example.pebuplan.activity.HomeActivity;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
@@ -86,8 +87,10 @@ public class YearFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        String month = String.valueOf(calendar.get(Calendar.MONTH));
+        int month = calendar.get(Calendar.MONTH);
         int year = calendar.get(Calendar.YEAR);
+
+        String[] monthNames = new DateFormatSymbols().getMonths();
 
 
         View view = inflater.inflate(R.layout.fragment_year, container, false);
@@ -135,7 +138,7 @@ public class YearFragment extends Fragment {
         back = view.findViewById(R.id.back_image_m);
         forward = view.findViewById(R.id.forward_image);
 
-        date.setText(month);
+        date.setText(monthNames[month]);
 
 
         submit_btn.setOnClickListener(new View.OnClickListener() {
@@ -235,9 +238,12 @@ public class YearFragment extends Fragment {
             public void onClick(View view) {
                 calendar.add(Calendar.MONTH, -1);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
-                String month = String.valueOf(calendar.get(Calendar.MONTH));
+                int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
-                date.setText(month);
+                String[] monthNames = new DateFormatSymbols().getMonths();
+
+
+                date.setText(monthNames[month]);
                 clear();
             }
         });
@@ -247,9 +253,12 @@ public class YearFragment extends Fragment {
             public void onClick(View view) {
                 calendar.add(Calendar.MONTH, 1);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
-                String month = String.valueOf(calendar.get(Calendar.MONTH));
+                int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
-                date.setText(month);
+                String[] monthNames = new DateFormatSymbols().getMonths();
+
+
+                date.setText(monthNames[month]);
                 clear();
             }
         });

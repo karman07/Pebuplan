@@ -256,6 +256,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.action_goals) {
             intent.putExtra("FragDetails", "f_goals");
             startActivity(intent);
+        }else if(id == R.id.action_bills){
+            intent.putExtra("FragDetails", "m_bills");
+            startActivity(intent);
         } else if (id == R.id.action_tracker) {
             intent.putExtra("FragDetails", "i_tracker");
             startActivity(intent);
