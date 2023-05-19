@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.pebuplan.R;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -44,10 +45,12 @@ public class TrackerIncome extends Fragment {
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
-        String month = dateFormat.format(calendar.getTime());
+        //String month = dateFormat.format(calendar.getTime());
         int year = calendar.get(Calendar.YEAR);
+        int month= calendar.get(Calendar.MONTH);
+        String[] monthNames = new DateFormatSymbols().getMonths();
 
-        String value = sharedPref.getString(month + "\t1-30\t" + year + "_income", "0" );
+        String value = sharedPref.getString(monthNames[month] + "_income", "0" );
         salary.setText("₱" + value);
         Log.d("why ? ", value);
         return view;

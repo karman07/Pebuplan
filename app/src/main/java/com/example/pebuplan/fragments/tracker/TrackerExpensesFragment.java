@@ -16,6 +16,7 @@ import com.example.pebuplan.R;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,12 +53,16 @@ public class TrackerExpensesFragment extends Fragment {
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
-        String month = dateFormat.format(calendar.getTime());
+        int month = calendar.get(Calendar.MONTH);
+
         int year = calendar.get(Calendar.YEAR);
+
+        String[] monthNames = new DateFormatSymbols().getMonths();
+
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
 
-        String value = sharedPref.getString(month + "\t1-30\t" + year + "_spent", "0,0,0,0,0,0");
+        String value = sharedPref.getString(monthNames[month] + "_spent", "0,0,0,0,0,0");
 
         String[] numberList = value.split(", ");
 
