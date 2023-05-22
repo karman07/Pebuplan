@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class TrackerExpensesFragment extends Fragment {
 
@@ -57,12 +58,14 @@ public class TrackerExpensesFragment extends Fragment {
 
         int year = calendar.get(Calendar.YEAR);
 
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
         String[] monthNames = new DateFormatSymbols().getMonths();
 
 
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = requireActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
 
-        String value = sharedPref.getString(monthNames[month] + "_spent", "0,0,0,0,0,0");
+        String value = sharedPref.getString(String.valueOf(day) + "_spent", "0,0,0,0,0");
 
         String[] numberList = value.split(", ");
 

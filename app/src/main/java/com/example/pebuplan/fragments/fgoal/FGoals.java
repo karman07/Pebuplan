@@ -1,6 +1,8 @@
 package com.example.pebuplan.fragments.fgoal;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -51,6 +53,10 @@ public class FGoals extends Fragment {
 
         ImageView back_image = view.findViewById(R.id.back_image);
 
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+
         back_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,11 +71,12 @@ public class FGoals extends Fragment {
                 bundle.putString("key", "home");
                 MainGoals fragment = new MainGoals();
                 fragment.setArguments(bundle);
+                editor.putString("fgoals_task","Home");
+                editor.apply();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container_main, fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
-
             }
         });
 
@@ -77,6 +84,8 @@ public class FGoals extends Fragment {
             @Override
             public void onClick(View view) {
                 bundle.putString("key", "debt");
+                editor.putString("fgoals_task","Debt");
+                editor.apply();
                 MainGoals fragment = new MainGoals();
                 fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -93,6 +102,8 @@ public class FGoals extends Fragment {
                 bundle.putString("key", "car");
                 MainGoals fragment = new MainGoals();
                 fragment.setArguments(bundle);
+                editor.putString("fgoals_task","Car");
+                editor.apply();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container_main, fragment);
                 transaction.addToBackStack(null);
@@ -108,6 +119,8 @@ public class FGoals extends Fragment {
                 bundle.putString("key", "vacation");
                 MainGoals fragment = new MainGoals();
                 fragment.setArguments(bundle);
+                editor.putString("fgoals_task","Vacation");
+                editor.apply();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container_main, fragment);
                 transaction.addToBackStack(null);
@@ -122,6 +135,8 @@ public class FGoals extends Fragment {
             public void onClick(View view) {
                 bundle.putString("key", "others");
                 MainGoals fragment = new MainGoals();
+                editor.putString("fgoals_task","Others");
+                editor.apply();
                 fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container_main, fragment);

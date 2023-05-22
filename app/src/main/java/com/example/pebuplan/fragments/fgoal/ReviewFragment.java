@@ -2,6 +2,7 @@ package com.example.pebuplan.fragments.fgoal;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
@@ -13,7 +14,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.pebuplan.R;
+import com.example.pebuplan.activity.MainActivity;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 
 
 public class ReviewFragment extends Fragment {
@@ -45,7 +53,8 @@ public class ReviewFragment extends Fragment {
         duration_tbox = view.findViewById(R.id.duration_tbox);
         review_image = view.findViewById(R.id.review_image);
 
-        String title_text = sharedPref.getString("title", "Home");
+//        Bitmap storedImage = ((MainActivity) getActivity()).loadImageFromStorage();
+        String title_text = sharedPref.getString("fgoals_task", "Home");
         String goal_text = sharedPref.getString("fgoals_price", "");
         String date_text = sharedPref.getString("fgoals_date", "");
         String monthly_contribution = sharedPref.getString("monthly_contribution", "");
@@ -61,5 +70,25 @@ public class ReviewFragment extends Fragment {
         review_image.setImageBitmap(BitmapFactory.decodeFile(image));
 
         return view;
+    }
+
+    private Bitmap loadImageFromStorage() {
+        String fileName = "my_image.jpg";
+        Bitmap imageBitmap = null;
+
+        try {
+            File file = new File(requireContext().getFilesDir(), fileName);
+            InputStream inputStream = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                inputStream = Files.newInputStream(file.toPath());
+            }
+            imageBitmap = BitmapFactory.decodeStream(inputStream);
+            assert inputStream != null;
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return imageBitmap;
     }
 }

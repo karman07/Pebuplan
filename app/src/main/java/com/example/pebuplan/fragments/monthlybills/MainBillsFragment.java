@@ -51,7 +51,7 @@ public class MainBillsFragment extends Fragment {
         back_image = view.findViewById(R.id.back_image);
 
         TextView title = view.findViewById(R.id.title);
-        title.setText("Payments");
+        title.setText("Monthly Bills");
         ViewPagerAdapter adapter = new ViewPagerAdapter(this);
         viewPager.setAdapter(adapter);
 

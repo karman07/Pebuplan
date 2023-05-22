@@ -6,6 +6,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -20,11 +22,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.pebuplan.R;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
+import java.util.Objects;
 
 
 public class DetailFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
@@ -35,7 +42,11 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
 
     String imagepath;
 
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_PICK = 2;
+    private static final int PERMISSION_REQUEST_CODE = 3;
 
+    ImageView upload_image;
 
     public DetailFragment() {
 
@@ -50,6 +61,7 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
 
         Button submit_btn = view.findViewById(R.id.button3);
@@ -61,12 +73,13 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
 
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        ImageView upload_image = view.findViewById(R.id.upload_image);
+        upload_image = view.findViewById(R.id.upload_image);
         upload_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, PICK_IMAGE);
+//                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(intent, PICK_IMAGE);
+                pickImage();
             }
         });
 
@@ -102,7 +115,7 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
         return view;
     }
 
-    public void selectImage(View view) {
+/*    public void selectImage(View view) {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, 0);
     }
@@ -116,6 +129,55 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
             ImageView imageView = getView().findViewById(R.id.upload_image);
             imageView.setImageURI(uri);
             imagepath = uri.getPath();
+        }
+    }*/
+
+    private void pickImage() {
+        Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(pickPhotoIntent, REQUEST_IMAGE_PICK);
+    }
+
+    private void saveImageToStorage(Bitmap bitmap) {
+        String fileName = "my_image.jpg";
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = requireContext().openFileOutput(fileName, Context.MODE_PRIVATE);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            outputStream.close();
+            Toast.makeText(getContext(), "Image saved", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_IMAGE_CAPTURE && data != null) {
+                Bundle extras = data.getExtras();
+                if (extras != null) {
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+                    if (imageBitmap != null) {
+                        upload_image.setImageBitmap(imageBitmap);
+                        saveImageToStorage(imageBitmap);
+                    }
+                }
+            } else if (requestCode == REQUEST_IMAGE_PICK && data != null) {
+                Uri selectedImageUri = data.getData();
+                try {
+                    InputStream inputStream = requireContext().getContentResolver().openInputStream(selectedImageUri);
+                    Bitmap imageBitmap = BitmapFactory.decodeStream(inputStream);
+                    if (imageBitmap != null) {
+                        upload_image.setImageBitmap(imageBitmap);
+                        saveImageToStorage(imageBitmap);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

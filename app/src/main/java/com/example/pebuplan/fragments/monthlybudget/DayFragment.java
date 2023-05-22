@@ -30,12 +30,14 @@ import android.widget.Toast;
 import com.example.pebuplan.R;
 import com.example.pebuplan.activity.HomeActivity;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class DayFragment extends Fragment {
 
@@ -73,6 +75,7 @@ public class DayFragment extends Fragment {
 
     }
 
+    SharedPreferences sharedPref;
 
 
 
@@ -137,6 +140,7 @@ public class DayFragment extends Fragment {
 
         date.setText(String.valueOf(day));
 
+        getValue();
 
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,6 +209,9 @@ public class DayFragment extends Fragment {
                     editor.putString("Total_Spent", spent_txt.getText().toString());
                     editor.putString("Total_Remains",remains_txt.getText().toString());
 
+                    editor.putString(date.getText().toString() + "_Total_Budget", budget_txt.getText().toString());
+                    editor.putString(date.getText().toString() + "_Total_Spent", spent_txt.getText().toString());
+                    editor.putString(date.getText().toString() + "_Total_Remains", remains_txt.getText().toString());
 
                     editor.apply();
 
@@ -235,10 +242,10 @@ public class DayFragment extends Fragment {
             public void onClick(View view) {
                 calendar.add(Calendar.DAY_OF_MONTH, -1);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
-                String month = dateFormat.format(calendar.getTime());
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 date.setText(String.valueOf(day));
                 clear();
+                getValue();
             }
         });
 
@@ -247,10 +254,10 @@ public class DayFragment extends Fragment {
             public void onClick(View view) {
                 calendar.add(Calendar.DAY_OF_MONTH, 1);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
-                String month = dateFormat.format(calendar.getTime());
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 date.setText(String.valueOf(day));
                 clear();
+                getValue();
             }
         });
 
@@ -258,7 +265,63 @@ public class DayFragment extends Fragment {
         return view;
     }
 
+    private void getValue() {
+        sharedPref = requireActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
+//        int month = calendar.get(Calendar.MONTH);
+//        String[] monthNames = new DateFormatSymbols().getMonths();
+
+        String value = sharedPref.getString(date.getText() + "_spent", ",,,,");
+        String value2 = sharedPref.getString(date.getText() + "_budget", ",,,,");
+
+        String value3 = sharedPref.getString(date.getText() + "_Total_Budget" , "Total");
+
+        String value4 = sharedPref.getString(date.getText() + "_Total_Spent" , "Spent");
+
+        String value5  = sharedPref.getString(date.getText() + "_Total_Remains" , "Remains");
+
+        budget_txt.setText(value3);
+        spent_txt.setText(value4);
+        remains_txt.setText(value5);
+
+
+        String[] spentListText = value.split(",");
+        String[] budgetListText = value2.split(",");
+
+
+
+
+        for (int i = 0; i < spentList.length; i++) {
+            TextView textView = spentList[i];
+            if (!(budgetListText.length == 0)) {
+                String number = spentListText[i].trim();
+                textView.setText(number);
+            }
+        }
+
+        for (int i = 0; i < budgetList.length; i++) {
+            TextView textView = budgetList[i];
+            if (!(budgetListText.length == 0)) {
+                String number = budgetListText[i].trim();
+                textView.setText(number);
+            }
+        }
+
+
+        for (int i = 0; i < remainsList.length; i++) {
+            TextView textView = remainsList[i];
+            if (!(budgetListText.length == 0)) {
+                int number1 = Integer.parseInt(budgetListText[i].trim());
+                int number2 = Integer.parseInt(spentListText[i].trim());
+                textView.setText(String.valueOf(number1 - number2));
+            }
+        }
+
+
+
+    }
+
     public void clear(){
+
         for (EditText editText : budgetList) {
             editText.setText("");
         }

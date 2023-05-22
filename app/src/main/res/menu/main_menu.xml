@@ -7,7 +7,7 @@
     <item
         android:id="@+id/action_goals"
         android:icon="@drawable/f1"
-        android:title="Monthly Goals"/>
+        android:title="Financial Goals"/>
     <item
         android:id="@+id/action_bills"
         android:icon="@drawable/f3"
@@ -19,7 +19,7 @@
     <item
         android:id="@+id/action_savings"
         android:icon="@drawable/f5"
-        android:title="Data Savings"/>
+        android:title="Savings"/>
 
     <item
         android:id="@+id/action_tips"
