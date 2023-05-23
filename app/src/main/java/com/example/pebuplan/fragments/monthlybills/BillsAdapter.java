@@ -40,7 +40,7 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.ViewHolder> 
         holder.monthTextView.setText(monthList.get(position));
         holder.categoryTextView.setText(categoryList.get(position));
         holder.amountTextView.setText(amountList.get(position));
-       // holder.modeTextView.setText(modeList.get(position));
+       holder.modeTextView.setText(modeList.get(position));
     }
 
     @Override
@@ -61,7 +61,7 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.ViewHolder> 
             monthTextView = itemView.findViewById(R.id.month);
             categoryTextView = itemView.findViewById(R.id.cate);
             amountTextView = itemView.findViewById(R.id.amount);
-           // modeTextView = itemView.findViewById(R.id.mode);
+            modeTextView = itemView.findViewById(R.id.mode);
         }
     }
 }

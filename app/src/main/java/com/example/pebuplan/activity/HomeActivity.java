@@ -80,7 +80,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
-
         m_budget = findViewById(R.id.m_budget);
         f_goals = findViewById(R.id.f_goals);
         m_bills = findViewById(R.id.m_bills);
