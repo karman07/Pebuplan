@@ -104,11 +104,13 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(requireContext(),"Data Saved! It might take few minutes to load the data",Toast.LENGTH_LONG).show();
                 editor.putString("goal_amount",goal_amount.getText().toString());
                 editor.putString("target_date",target_date.getText().toString());
                 editor.putString("monthly_contribution",monthly_contribution.getText().toString());
                 editor.putString("image_goals",imagepath);
                 editor.apply();
+                //Toast.makeText(requireContext(),"Da",Toast.LENGTH_LONG).show();
             }
         });
 

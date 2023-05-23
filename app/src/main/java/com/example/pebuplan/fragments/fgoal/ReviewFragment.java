@@ -59,7 +59,7 @@ public class ReviewFragment extends Fragment {
         String date_text = sharedPref.getString("fgoals_date", "");
         String monthly_contribution = sharedPref.getString("monthly_contribution", "");
         String duration = sharedPref.getString("target_date", "");
-        String image = sharedPref.getString("image_goals", "R.drawable.upload_image");
+//        String image = sharedPref.getString("image_goals", "R.drawable.upload_image");
 
 
         title.setText(title_text);
@@ -67,7 +67,7 @@ public class ReviewFragment extends Fragment {
         target_date.setText(date_text);
         monthly_tbox.setText(monthly_contribution);
         duration_tbox.setText(duration);
-        review_image.setImageBitmap(BitmapFactory.decodeFile(image));
+        review_image.setImageBitmap(loadImageFromStorage());
 
         return view;
     }

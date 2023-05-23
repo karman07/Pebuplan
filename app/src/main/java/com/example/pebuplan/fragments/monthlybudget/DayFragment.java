@@ -244,6 +244,7 @@ public class DayFragment extends Fragment {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 date.setText(String.valueOf(day));
+                income_txt.setText("");
                 clear();
                 getValue();
             }
@@ -256,6 +257,7 @@ public class DayFragment extends Fragment {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 date.setText(String.valueOf(day));
+                income_txt.setText("");
                 clear();
                 getValue();
             }
@@ -278,6 +280,12 @@ public class DayFragment extends Fragment {
         String value4 = sharedPref.getString(date.getText() + "_Total_Spent" , "Spent");
 
         String value5  = sharedPref.getString(date.getText() + "_Total_Remains" , "Remains");
+
+        String value6 = sharedPref.getString(date.getText()+"_income", String.valueOf(income_txt.getText()));
+
+        income_txt.setText(value6);
+
+
 
         budget_txt.setText(value3);
         spent_txt.setText(value4);

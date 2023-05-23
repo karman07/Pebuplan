@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.pebuplan.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -74,6 +75,7 @@ public class CalculateGoals extends Fragment implements DatePickerDialog.OnDateS
                 editor.putString("fgoals_downpayment", downpayment_price.getText().toString());
                 editor.putString("fgoals_date", datetext.getText().toString());
                 editor.apply();
+                Toast.makeText(requireContext(),"Data Saved!", Toast.LENGTH_LONG).show();
             }
         });
 

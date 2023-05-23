@@ -18,6 +18,7 @@ import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 
 public class TrackerIncome extends Fragment {
@@ -41,7 +42,7 @@ public class TrackerIncome extends Fragment {
 
         TextView salary = view.findViewById(R.id.salary_text);
 
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = requireActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
@@ -50,7 +51,8 @@ public class TrackerIncome extends Fragment {
         int month= calendar.get(Calendar.MONTH);
         String[] monthNames = new DateFormatSymbols().getMonths();
 
-        String value = sharedPref.getString(monthNames[month] + "_income", "0" );
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String value = sharedPref.getString(String.valueOf(day) + "_income", "0" );
         salary.setText("₱" + value);
         Log.d("why ? ", value);
         return view;

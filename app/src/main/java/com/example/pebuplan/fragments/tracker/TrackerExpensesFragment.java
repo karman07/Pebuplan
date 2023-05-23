@@ -72,7 +72,7 @@ public class TrackerExpensesFragment extends Fragment {
         for (int i = 0; i < textViewList.size(); i++) {
             TextView textView = textViewList.get(i);
             String number = numberList[i];
-            textView.setText("₱" + String.valueOf(number));
+            textView.setText("₱" + number);
         }
 
 

@@ -50,16 +50,18 @@ public class PinConfirmActivity extends AppCompatActivity {
         if(p_tick.equals("false")){
             hide_text.setVisibility(View.INVISIBLE);
             pin_Code_box.setVisibility(View.INVISIBLE);
+            Intent intent = new Intent(PinConfirmActivity.this, HomeActivity.class);
+            startActivity(intent);
         }
 
         if(finger_tick.equals("false")){
             signwithfinger.setVisibility(View.INVISIBLE);
         }
 
-        if(p_tick.equals("false") && finger_tick.equals("false") ){
+/*        if(p_tick.equals("false") && finger_tick.equals("false") ){
             Intent intent = new Intent(PinConfirmActivity.this, HomeActivity.class);
             startActivity(intent);
-        }
+        }*/
 
         //Log.d("1",value);
 

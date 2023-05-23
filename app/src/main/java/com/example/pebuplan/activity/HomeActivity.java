@@ -75,6 +75,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             OneSignal.initWithContext(this);
             OneSignal.setAppId("c803c1d8-6b5e-4f37-a6a5-604399e347ab");
             OneSignal.promptForPushNotifications();
+        }else{
+            Log.d("Hi", "Bhai data nahi hai");
         }
 
 

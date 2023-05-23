@@ -204,7 +204,14 @@ public class TransferFragment extends Fragment {
                     String listJson3 = new Gson().toJson(amoun);
                     String listJson4 = new Gson().toJson(mode);
 
-                    if (selectedItem.equals("Gcash")) {
+                    editor.putString("month", listJson1);
+                    editor.putString("cate", listJson2);
+                    editor.putString("amount", listJson3);
+                    editor.putString("mode", listJson4);
+                    editor.apply();
+
+                    Toast.makeText(requireContext(),"Your Data has been saved !",Toast.LENGTH_LONG).show();
+                    /*if (selectedItem.equals("Gcash")) {
                         PackageManager packageManager = getContext().getPackageManager();
 
                         Intent intent = packageManager.getLaunchIntentForPackage("com.globe.gcash.android");
@@ -248,7 +255,7 @@ public class TransferFragment extends Fragment {
                             Log.d("i", "GCash app is not installed");
                         }
 
-                    }
+                    }*/
                 }else{
                     Toast.makeText(getContext(), "Every field is important", Toast.LENGTH_SHORT).show();
                     Log.d("i", "Every field is important");

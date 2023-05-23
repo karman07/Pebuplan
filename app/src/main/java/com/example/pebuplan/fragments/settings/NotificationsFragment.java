@@ -14,9 +14,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pebuplan.R;
 import com.example.pebuplan.activity.HomeActivity;
+
+import java.util.Objects;
 
 public class NotificationsFragment extends Fragment {
 
@@ -48,7 +51,7 @@ public class NotificationsFragment extends Fragment {
 
         Button save = view.findViewById(R.id.button6);
 
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = requireActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         String bill_tick = sharedPref.getString("bill_reminder", "default_value");
@@ -77,6 +80,8 @@ public class NotificationsFragment extends Fragment {
                 if(bill_reminder.isChecked() && budget_reminder.isChecked()){
                     editor.putString("bill_reminder","true");
                     editor.putString("bill_noti","true");
+                    editor.apply();
+                    Toast.makeText(requireContext(), "Data Saved !", Toast.LENGTH_SHORT).show();
                 }
             }
         });
