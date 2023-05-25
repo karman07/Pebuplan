@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/Budget_Total"
-            android:layout_width="51dp"
+            android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:text="Total"
             android:textColor="@color/black"
@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/budget_Total"
-            android:layout_width="51dp"
+            android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:text="Spent"
             android:textColor="@color/black"

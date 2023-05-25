@@ -97,7 +97,7 @@ public class SecurityFragment extends Fragment {
                 if (!finger.isChecked()){
                     editor.putString("finger_tick","false");
                 }else {
-                    editor.putString("p_tick","true");
+                    editor.putString("finger_tick","true");
                 }
 
                 editor.apply();

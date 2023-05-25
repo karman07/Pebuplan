@@ -34,6 +34,7 @@ public class ReviewFragment extends Fragment {
         // Required empty public constructor
     }
 
+    String name_plate;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,7 @@ public class ReviewFragment extends Fragment {
         duration_tbox = view.findViewById(R.id.duration_tbox);
         review_image = view.findViewById(R.id.review_image);
 
-        String name_plate = sharedPref.getString("fgoals_task", "Home");
+        name_plate = sharedPref.getString("fgoals_task", "Home");
 
 //        Bitmap storedImage = ((MainActivity) getActivity()).loadImageFromStorage();
         String title_text = sharedPref.getString("fgoals_task", "Home");
@@ -75,7 +76,7 @@ public class ReviewFragment extends Fragment {
     }
 
     private Bitmap loadImageFromStorage() {
-        String fileName = "my_image.jpg";
+        String fileName = name_plate + "my_image.jpg";
         Bitmap imageBitmap = null;
 
         try {

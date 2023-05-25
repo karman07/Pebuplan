@@ -46,6 +46,7 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
     private static final int REQUEST_IMAGE_PICK = 2;
     private static final int PERMISSION_REQUEST_CODE = 3;
 
+    String name_plate;
     ImageView upload_image;
 
     public DetailFragment() {
@@ -73,7 +74,7 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
 
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        String name_plate = sharedPref.getString("fgoals_task", "Home");
+        name_plate = sharedPref.getString("fgoals_task", "Home");
 
         upload_image = view.findViewById(R.id.upload_image);
         upload_image.setOnClickListener(new View.OnClickListener() {
@@ -142,7 +143,7 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
     }
 
     private void saveImageToStorage(Bitmap bitmap) {
-        String fileName = "my_image.jpg";
+        String fileName = name_plate + "my_image.jpg";
         FileOutputStream outputStream;
 
         try {

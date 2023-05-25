@@ -72,7 +72,7 @@ public class TransferFragment extends Fragment {
 
         String[] items = {"Bills and utilities", "Education", "Family Care", "Investment", "Insurance","Drink & Dine"};
 
-        String[] items2 = {"Yes","No"};
+        String[] items2 = {"Paid","Unpaid"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_spinner_dropdown_item, items);
 
