@@ -23,6 +23,7 @@ import com.google.android.material.tabs.TabLayout;
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -70,13 +71,15 @@ public class TrackerMainFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
 //        String month = dateFormat.format(calendar.getTime());
-        String month = String.valueOf(calendar.get(Calendar.MONTH));
+        int month = calendar.get(Calendar.MONTH);
+        String[] monthNames = new DateFormatSymbols().getMonths();
+
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
 
-        String value = sharedPref.getString(month + "_spent", "0,0,0,0,0,0");
+        String value = sharedPref.getString(monthNames[month]+ "_spent", "0,0,0,0,0");
 
-        String[] numberList = value.split(", ");
+        String[] numberList = value.split(",");
         String[] colours = {"#FF0000","#00ff00","#0000FF","#FFFF00","#FFA500"};
 
         back_image = view.findViewById(R.id.back_image);
@@ -121,12 +124,15 @@ public class TrackerMainFragment extends Fragment {
             }
 
             private void income() {
+                String value = sharedPref.getString(monthNames[month] + "_spent", "0,0,0,0,0");
+
+                String[] numberList = value.split(",");
+
                 pieChart.clearChart();
                 for (int i = 0; i < numberList.length; i++) {
-//                    Log.d("Hi",String.valueOf(i));
                     pieChart.addPieSlice(new PieModel(
                             "Food",
-                            Integer.parseInt(numberList[i]),
+                            Integer.parseInt(numberList[i].trim()),
                             Color.parseColor(colours[i])));
                 }
             }

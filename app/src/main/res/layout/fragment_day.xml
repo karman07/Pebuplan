@@ -41,9 +41,9 @@
             android:id="@+id/utilities_budget"
             android:layout_width="69dp"
             android:layout_height="40dp"
-            android:gravity="center"
             android:background="@drawable/green_border_budget"
             android:ems="10"
+            android:gravity="center"
             android:inputType="number"
             app:layout_constraintStart_toStartOf="@+id/housing_budget"
             app:layout_constraintTop_toBottomOf="@+id/housing_budget" />
@@ -67,8 +67,8 @@
             android:layout_height="40dp"
             android:background="@drawable/green_border_budget"
             android:ems="10"
-            android:inputType="number"
             android:gravity="center"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="@+id/housing_spent"
             app:layout_constraintStart_toStartOf="@+id/housing_spent"
             app:layout_constraintTop_toBottomOf="@+id/housing_spent" />
@@ -88,11 +88,11 @@
         <EditText
             android:id="@+id/utilities_remains"
             android:layout_width="69dp"
-            android:gravity="center"
             android:layout_height="40dp"
             android:background="@drawable/green_border_budget"
             android:ems="10"
             android:enabled="false"
+            android:gravity="center"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="@+id/housing_remains"
             app:layout_constraintStart_toStartOf="@+id/housing_remains"
@@ -101,12 +101,12 @@
         <EditText
             android:id="@+id/insurance_remains"
             android:layout_width="69dp"
-            android:gravity="center"
             android:layout_height="40dp"
             android:background="@drawable/green_border_budget"
             android:ems="10"
-            android:inputType="number"
             android:enabled="false"
+            android:gravity="center"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="@+id/housing_remains"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/housing_remains"
@@ -114,11 +114,11 @@
 
         <EditText
             android:id="@+id/housing_budget"
-            android:gravity="center"
             android:layout_width="69dp"
             android:layout_height="40dp"
             android:background="@drawable/green_border_budget"
             android:ems="10"
+            android:gravity="center"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="@+id/transport_budget"
             app:layout_constraintStart_toStartOf="@+id/transport_budget"
@@ -128,9 +128,9 @@
             android:id="@+id/housing_spent"
             android:layout_width="69dp"
             android:layout_height="40dp"
-            android:gravity="center"
             android:background="@drawable/green_border_budget"
             android:ems="10"
+            android:gravity="center"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="@+id/transport_spent"
             app:layout_constraintStart_toStartOf="@+id/transport_spent"
@@ -155,8 +155,8 @@
             android:layout_height="40dp"
             android:background="@drawable/green_border_budget"
             android:ems="10"
-            android:inputType="number"
             android:gravity="center"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="@+id/food_budget"
             app:layout_constraintStart_toStartOf="@+id/food_budget"
             app:layout_constraintTop_toBottomOf="@+id/food_budget" />
@@ -164,10 +164,10 @@
         <EditText
             android:id="@+id/transport_spent"
             android:layout_width="69dp"
-            android:gravity="center"
             android:layout_height="40dp"
             android:background="@drawable/green_border_budget"
             android:ems="10"
+            android:gravity="center"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="@+id/spent_food"
             app:layout_constraintStart_toStartOf="@+id/spent_food"
@@ -180,8 +180,8 @@
             android:background="@drawable/green_border_budget"
             android:ems="10"
             android:enabled="false"
-            android:inputType="number"
             android:gravity="center"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="@+id/remains"
             app:layout_constraintStart_toStartOf="@+id/remains"
             app:layout_constraintTop_toBottomOf="@+id/remains" />
@@ -454,6 +454,19 @@
             app:layout_constraintHorizontal_bias="0.509"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/budget_Total" />
+
+        <TextView
+            android:id="@+id/textView49"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Day"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/timeline"
+            app:layout_constraintEnd_toStartOf="@+id/back_image_m"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/timeline" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@
     android:id="@+id/cardView2"
     android:layout_width="300dp"
     android:layout_height="50dp"
-    android:layout_marginTop="40dp"
+    android:layout_margin="10dp"
     app:cardElevation="10dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -18,8 +18,8 @@
 
         <TextView
             android:id="@+id/textView23"
-            android:layout_width="51dp"
-            android:layout_height="26dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:text="Month"
             android:textColor="@color/black"
@@ -31,28 +31,28 @@
 
         <TextView
             android:id="@+id/textView30"
-            android:layout_width="116dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Number of days"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView23"
+            app:layout_constraintEnd_toStartOf="@+id/textView31"
             app:layout_constraintStart_toEndOf="@+id/textView23"
             app:layout_constraintTop_toTopOf="@+id/textView23" />
 
         <TextView
             android:id="@+id/textView31"
-            android:layout_width="65dp"
-            android:layout_height="26dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Savings"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView30"
-            app:layout_constraintStart_toEndOf="@+id/textView30"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView30" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

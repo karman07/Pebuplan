@@ -90,10 +90,14 @@ public class SecurityFragment extends Fragment {
             public void onClick(View v) {
                 if(!pin.isChecked()){
                     editor.putString("p_tick","false");
+                }else{
+                    editor.putString("p_tick","true");
                 }
 
                 if (!finger.isChecked()){
                     editor.putString("finger_tick","false");
+                }else {
+                    editor.putString("p_tick","true");
                 }
 
                 editor.apply();

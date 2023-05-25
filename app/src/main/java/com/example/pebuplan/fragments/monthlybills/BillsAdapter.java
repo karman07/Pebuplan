@@ -24,7 +24,7 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.ViewHolder> 
         this.monthList = monthList;
         this.categoryList = categoryList;
         this.amountList = amountList;
-        //this.modeList = modeList;
+        this.modeList = modeList;
     }
 
     @NonNull

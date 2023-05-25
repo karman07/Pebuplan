@@ -68,7 +68,6 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/amount"
             app:layout_constraintStart_toEndOf="@+id/amount"
             app:layout_constraintTop_toTopOf="@+id/amount" />

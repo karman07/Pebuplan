@@ -53,6 +53,8 @@ public class CalculateGoals extends Fragment implements DatePickerDialog.OnDateS
 
         SharedPreferences.Editor editor = sharedPref.edit();
 
+        String name_plate = sharedPref.getString("fgoals_task", "Home");
+
         date_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,9 +73,9 @@ public class CalculateGoals extends Fragment implements DatePickerDialog.OnDateS
         sumbit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editor.putString("fgoals_price", home_price.getText().toString());
-                editor.putString("fgoals_downpayment", downpayment_price.getText().toString());
-                editor.putString("fgoals_date", datetext.getText().toString());
+                editor.putString(name_plate + "fgoals_price", home_price.getText().toString());
+                editor.putString(name_plate + "fgoals_downpayment", downpayment_price.getText().toString());
+                editor.putString(name_plate + "fgoals_date", datetext.getText().toString());
                 editor.apply();
                 Toast.makeText(requireContext(),"Data Saved!", Toast.LENGTH_LONG).show();
             }

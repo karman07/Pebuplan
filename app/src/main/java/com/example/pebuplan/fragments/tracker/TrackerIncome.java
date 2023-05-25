@@ -52,7 +52,7 @@ public class TrackerIncome extends Fragment {
         String[] monthNames = new DateFormatSymbols().getMonths();
 
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        String value = sharedPref.getString(String.valueOf(day) + "_income", "0" );
+        String value = sharedPref.getString(monthNames[month].toString()+ "_income", "0" );
         salary.setText("₱" + value);
         Log.d("why ? ", value);
         return view;

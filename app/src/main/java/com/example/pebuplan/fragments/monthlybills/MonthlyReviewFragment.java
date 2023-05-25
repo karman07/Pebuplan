@@ -72,7 +72,7 @@ public class MonthlyReviewFragment extends Fragment {
 
         String json = sharedPreferences.getString("month", "");
 
-        String json2 = sharedPreferences.getString("category", "");
+        String json2 = sharedPreferences.getString("cate", "");
 
         String json3 = sharedPreferences.getString("amount", "");
 
@@ -85,7 +85,10 @@ public class MonthlyReviewFragment extends Fragment {
         ArrayList<String> amountList = gson.fromJson(json3, type);
         ArrayList<String> modeList = gson.fromJson(json4, type);
 
-        Log.d("Tag", String.valueOf(modeList.size()));
+        Log.d("Tag1", String.valueOf(modeList.size()));
+        Log.d("Tag2", String.valueOf(categoryList.size()));
+        Log.d("Tag3", String.valueOf(amountList.size()));
+        Log.d("Tag4", String.valueOf(modeList.size()));
 
        BillsAdapter adapter = new BillsAdapter(monthList, categoryList, amountList, modeList);
 //

@@ -40,6 +40,9 @@ import com.onesignal.OneSignal;
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
+import java.text.DateFormatSymbols;
+import java.util.Calendar;
+
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private VideoView videoView;
@@ -114,11 +117,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
          Log.d("hi","1");
         //drawerLayout.close();
 
+        Calendar calendar = Calendar.getInstance();
+
+        int month = calendar.get(Calendar.MONTH);
+        String[] monthNames = new DateFormatSymbols().getMonths();
 
 
-        String income = prefs.getString("Total_Budget","0").replace("₱", "");
-        String expenses = prefs.getString("Total_Spent","0").replace("₱", "");
-        String savings = prefs.getString("Total_Remains","0").replace("₱", "");
+        String income = prefs.getString(monthNames[month] + "_Total_Budget","0").replace("₱", "");
+        String expenses = prefs.getString(monthNames[month] + "_Total_Spent","0").replace("₱", "");
+        String savings = prefs.getString(monthNames[month] + "_Total_Remains","0").replace("₱", "");
 
         final Handler handler = new Handler();
         final Runnable updateSeekBar = new Runnable() {

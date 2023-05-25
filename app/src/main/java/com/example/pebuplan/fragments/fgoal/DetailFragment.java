@@ -73,6 +73,8 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
 
         SharedPreferences.Editor editor = sharedPref.edit();
 
+        String name_plate = sharedPref.getString("fgoals_task", "Home");
+
         upload_image = view.findViewById(R.id.upload_image);
         upload_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,9 +107,9 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
             @Override
             public void onClick(View view) {
                 Toast.makeText(requireContext(),"Data Saved! It might take few minutes to load the data",Toast.LENGTH_LONG).show();
-                editor.putString("goal_amount",goal_amount.getText().toString());
-                editor.putString("target_date",target_date.getText().toString());
-                editor.putString("monthly_contribution",monthly_contribution.getText().toString());
+                editor.putString(name_plate + "goal_amount",goal_amount.getText().toString());
+                editor.putString(name_plate + "target_date",target_date.getText().toString());
+                editor.putString(name_plate + "monthly_contribution",monthly_contribution.getText().toString());
                 editor.putString("image_goals",imagepath);
                 editor.apply();
                 //Toast.makeText(requireContext(),"Da",Toast.LENGTH_LONG).show();

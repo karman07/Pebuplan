@@ -72,7 +72,7 @@ public class TransferFragment extends Fragment {
 
         String[] items = {"Bills and utilities", "Education", "Family Care", "Investment", "Insurance","Drink & Dine"};
 
-        String[] items2 = {"Gcash","Paymaya"};
+        String[] items2 = {"Yes","No"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_spinner_dropdown_item, items);
 
@@ -157,7 +157,7 @@ public class TransferFragment extends Fragment {
             month = new ArrayList<>();
         }
 
-        String savedListJson2 = sharedPreferences.getString("category", "");
+        String savedListJson2 = sharedPreferences.getString("cate", "");
         ArrayList<String> cate;
 
         if (!savedListJson2.isEmpty()) {
@@ -194,7 +194,7 @@ public class TransferFragment extends Fragment {
                 if (!datetext.getText().toString().isEmpty() && !amount.getText().toString().isEmpty() && !transfer.getText().toString().isEmpty()) {
 
                     month.add(new DateFormatSymbols().getMonths()[month_date]);
-                    cate.add(cat_selectItem.substring(0,5));
+                    cate.add(cat_selectItem);
                     amoun.add("₱" + amount.getText().toString());
                     mode.add(selectedItem);
 
@@ -211,51 +211,6 @@ public class TransferFragment extends Fragment {
                     editor.apply();
 
                     Toast.makeText(requireContext(),"Your Data has been saved !",Toast.LENGTH_LONG).show();
-                    /*if (selectedItem.equals("Gcash")) {
-                        PackageManager packageManager = getContext().getPackageManager();
-
-                        Intent intent = packageManager.getLaunchIntentForPackage("com.globe.gcash.android");
-
-                        if (intent != null) {
-
-                            editor.putString("month", listJson1);
-                            editor.putString("category", listJson2);
-                            editor.putString("amount", listJson3);
-                            editor.putString("mode", listJson4);
-                            editor.apply();
-
-                            startActivity(intent);
-                        } else {
-
-                            editor.putString("month", listJson1);
-                            editor.putString("category", listJson2);
-                            editor.putString("amount", listJson3);
-                            editor.putString("mode", listJson4);
-                            editor.apply();
-
-                            Toast.makeText(getContext(), "GCash app is not installed", Toast.LENGTH_SHORT).show();
-                            Log.d("i", "GCash app is not installed");
-                        }
-                    } else {
-                        PackageManager packageManager = getContext().getPackageManager();
-
-                        Intent intent = packageManager.getLaunchIntentForPackage("com.paymaya");
-
-                        if (intent != null) {
-
-                            editor.putString("month", listJson1);
-                            editor.putString("cate", listJson2);
-                            editor.putString("amount", listJson3);
-                            editor.putString("mode", listJson4);
-                            editor.apply();
-
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(getContext(), "GCash app is not installed", Toast.LENGTH_SHORT).show();
-                            Log.d("i", "GCash app is not installed");
-                        }
-
-                    }*/
                 }else{
                     Toast.makeText(getContext(), "Every field is important", Toast.LENGTH_SHORT).show();
                     Log.d("i", "Every field is important");

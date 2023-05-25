@@ -53,12 +53,14 @@ public class ReviewFragment extends Fragment {
         duration_tbox = view.findViewById(R.id.duration_tbox);
         review_image = view.findViewById(R.id.review_image);
 
+        String name_plate = sharedPref.getString("fgoals_task", "Home");
+
 //        Bitmap storedImage = ((MainActivity) getActivity()).loadImageFromStorage();
         String title_text = sharedPref.getString("fgoals_task", "Home");
-        String goal_text = sharedPref.getString("fgoals_price", "");
-        String date_text = sharedPref.getString("fgoals_date", "");
-        String monthly_contribution = sharedPref.getString("monthly_contribution", "");
-        String duration = sharedPref.getString("target_date", "");
+        String goal_text = sharedPref.getString(name_plate +  "fgoals_price", "");
+        String date_text = sharedPref.getString(name_plate + "fgoals_date", "");
+        String monthly_contribution = sharedPref.getString(name_plate + "monthly_contribution", "");
+        String duration = sharedPref.getString(name_plate + "target_date", "");
 //        String image = sharedPref.getString("image_goals", "R.drawable.upload_image");
 
 

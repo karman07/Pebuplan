@@ -73,7 +73,7 @@ Step 4: Cash, credit, need and want\n
 Step 5: Total expenses and remains\n
 * The total will automatically computed.
 Step 6: Submit"
-                    android:textSize="9sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/textView47"
@@ -135,22 +135,19 @@ Step 6: Submit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text=" Step 1: Input the amount and category of all bills you pay\n Step 2: Select a date\n
-
+                    android:padding="10dp"
+                    android:text="Step 1: Input the amount and category of all bills you pay\n Step 2: Select a date\n
 Step 3: Watch the amount and percentage of income and expenses\n
 * When you enter an income and expenses, keep track of how much is left behind in category to avoid overspending.\n
-
 Step 4: Automate bills review\n
 * The date, category, amount and paid is automatically placed. Set the paid if the bill is already done.\n
-
 Step 5: Keep paying attention (Set the reminder)\n
 * Monitor payments to ensure enough money and check the bills to avoid due date of bills."
-                    android:textSize="9sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    android:padding="12dp"
                     android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="@+id/textView52"
-                    app:layout_constraintStart_toStartOf="@+id/textView52"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView52" />
 
                 <TextView
@@ -226,7 +223,7 @@ Step 5: Set monthly check-ins\n
 * Make sure your income minus expenses and savings equals zero. If not, organize your expenses and savings before budgeting for the coming month.\n
 
 Organizing and tracking income and expenses isn't about not spending any money, it's about choosing how to spend based on what's important to you. This gives an accurate picture of where your money is going and where you want it to go instead."
-                    android:textSize="9sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/textView53"

@@ -75,7 +75,7 @@ public class YearFragment extends Fragment {
 
     }
 
-
+    SharedPreferences sharedPref;
 
 
     @Override
@@ -140,6 +140,7 @@ public class YearFragment extends Fragment {
 
         date.setText(monthNames[month]);
 
+        getValue();
 
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,12 +185,12 @@ public class YearFragment extends Fragment {
 
                     for (String item : budget_text) {
                         stringBuilder.append(item);
-                        stringBuilder.append(", ");
+                        stringBuilder.append(",");
                     }
 
                     for (String item : spent_text) {
                         stringBuilder2.append(item);
-                        stringBuilder2.append(", ");
+                        stringBuilder2.append(",");
                     }
 
 
@@ -204,9 +205,9 @@ public class YearFragment extends Fragment {
                     editor.putString(date.getText().toString() + "_spent", result2);
                     editor.putString(date.getText().toString() + "_income", String.valueOf(income_txt.getText()));
 
-                    editor.putString("Total_Budget", budget_txt.getText().toString());
-                    editor.putString("Total_Spent", spent_txt.getText().toString());
-                    editor.putString("Total_Remains",remains_txt.getText().toString());
+                    editor.putString(date.getText().toString() + "_Total_Budget", budget_txt.getText().toString());
+                    editor.putString(date.getText().toString() + "_Total_Spent", spent_txt.getText().toString());
+                    editor.putString(date.getText().toString() + "_Total_Remains",remains_txt.getText().toString());
 
 
                     editor.apply();
@@ -241,10 +242,9 @@ public class YearFragment extends Fragment {
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
                 String[] monthNames = new DateFormatSymbols().getMonths();
-
-
                 date.setText(monthNames[month]);
                 clear();
+                getValue();
             }
         });
 
@@ -256,15 +256,75 @@ public class YearFragment extends Fragment {
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
                 String[] monthNames = new DateFormatSymbols().getMonths();
-
-
                 date.setText(monthNames[month]);
                 clear();
+                getValue();
             }
         });
 
 
         return view;
+    }
+
+    private void getValue() {
+        sharedPref = requireActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
+//        int month = calendar.get(Calendar.MONTH);
+//        String[] monthNames = new DateFormatSymbols().getMonths();
+
+        String value = sharedPref.getString(date.getText().toString() + "_spent", ",,,,");
+        String value2 = sharedPref.getString(date.getText().toString() + "_budget", ",,,,");
+
+        String value3 = sharedPref.getString(date.getText().toString() + "_Total_Budget" , "Total");
+
+        String value4 = sharedPref.getString(date.getText().toString() + "_Total_Spent" , "Spent");
+
+        String value5  = sharedPref.getString(date.getText().toString() + "_Total_Remains" , "Remains");
+
+        String value6 = sharedPref.getString(date.getText().toString() +"_income", String.valueOf(income_txt.getText()));
+
+        income_txt.setText(value6);
+
+
+
+        budget_txt.setText(value3);
+        spent_txt.setText(value4);
+        remains_txt.setText(value5);
+
+
+        String[] spentListText = value.split(",");
+        String[] budgetListText = value2.split(",");
+
+
+
+
+        for (int i = 0; i < spentList.length; i++) {
+            TextView textView = spentList[i];
+            if (!(budgetListText.length == 0)) {
+                String number = spentListText[i].trim();
+                textView.setText(number);
+            }
+        }
+
+        for (int i = 0; i < budgetList.length; i++) {
+            TextView textView = budgetList[i];
+            if (!(budgetListText.length == 0)) {
+                String number = budgetListText[i].trim();
+                textView.setText(number);
+            }
+        }
+
+
+        for (int i = 0; i < remainsList.length; i++) {
+            TextView textView = remainsList[i];
+            if (!(budgetListText.length == 0)) {
+                int number1 = Integer.parseInt(budgetListText[i].trim());
+                int number2 = Integer.parseInt(spentListText[i].trim());
+                textView.setText(String.valueOf(number1 - number2));
+            }
+        }
+
+
+
     }
 
     public void clear(){

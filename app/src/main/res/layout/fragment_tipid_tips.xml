@@ -20,14 +20,18 @@
             <ImageView
                 android:layout_width="407dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/capture" />
+                android:src="@drawable/t_t_1" />
 
             <ImageView
                 android:layout_width="407dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/capture2" />
+                android:src="@drawable/t_t_2" />
 
-            <!-- Add more ImageView elements for additional images -->
+            <ImageView
+                android:layout_width="407dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/t_t_3" />
+
 
         </LinearLayout>
     </HorizontalScrollView>

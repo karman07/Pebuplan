@@ -65,9 +65,9 @@ public class TrackerExpensesFragment extends Fragment {
 
         SharedPreferences sharedPref = requireActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
 
-        String value = sharedPref.getString(String.valueOf(day) + "_spent", "0,0,0,0,0");
+        String value = sharedPref.getString(monthNames[month] + "_spent", "0,0,0,0,0");
 
-        String[] numberList = value.split(", ");
+        String[] numberList = value.split(",");
 
         for (int i = 0; i < textViewList.size(); i++) {
             TextView textView = textViewList.get(i);
