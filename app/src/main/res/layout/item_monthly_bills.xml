@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Categories"
+            app:layout_constraintEnd_toStartOf="@id/amount"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Amount"
+            app:layout_constraintTop_toTopOf="@id/category"
+            app:layout_constraintStart_toEndOf="@id/category"
+            app:layout_constraintEnd_toStartOf="@id/pay"/>
+
+        <TextView
+            android:id="@+id/pay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Pay"
+            app:layout_constraintEnd_toStartOf="@id/debt"
+            app:layout_constraintTop_toTopOf="@id/amount"
+            app:layout_constraintStart_toEndOf="@id/amount"/>
+
+        <TextView
+            android:id="@+id/debt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Debt"
+            app:layout_constraintEnd_toStartOf="@id/status"
+            app:layout_constraintStart_toEndOf="@id/pay"
+            app:layout_constraintTop_toTopOf="@id/pay"/>
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/debt"
+            app:layout_constraintStart_toEndOf="@id/debt"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

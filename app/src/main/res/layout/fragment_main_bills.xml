@@ -17,25 +17,91 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/headingConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/purple_500"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include5"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/white"
-            app:tabMode="fixed"
-            app:tabTextColor="@color/white" />
+            android:layout_margin="5dp"
+            app:layout_constraintTop_toBottomOf="@id/include5">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
-            android:layout_width="409dp"
-            android:layout_height="625dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:padding="4dp"
+                android:text="Categories"
+                android:textColor="@color/white"
+                android:background="@color/purple_500"
+                app:layout_constraintEnd_toStartOf="@id/amount"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Amount"
+                android:padding="4dp"
+                android:textColor="@color/white"
+                android:background="@color/purple_500"
+                app:layout_constraintTop_toTopOf="@id/category"
+                app:layout_constraintStart_toEndOf="@id/category"
+                app:layout_constraintEnd_toStartOf="@id/pay"/>
+
+            <TextView
+                android:id="@+id/pay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="Pay"
+                android:textColor="@color/white"
+                android:background="@color/purple_500"
+                app:layout_constraintEnd_toStartOf="@id/debt"
+                app:layout_constraintTop_toTopOf="@id/amount"
+                app:layout_constraintStart_toEndOf="@id/amount"/>
+
+            <TextView
+                android:id="@+id/debt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="Debt"
+                android:textColor="@color/white"
+                android:background="@color/purple_500"
+                app:layout_constraintEnd_toStartOf="@id/status"
+                app:layout_constraintStart_toEndOf="@id/pay"
+                app:layout_constraintTop_toTopOf="@id/pay"/>
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="0dp"
+                android:background="@color/purple_500"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:padding="4dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/debt"
+                app:layout_constraintStart_toEndOf="@id/debt"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/monthly_bill_recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/headingConstraintLayout"
+            app:layout_constraintStart_toStartOf="@id/headingConstraintLayout"
+            app:layout_constraintEnd_toEndOf="@id/headingConstraintLayout"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/add_monthly_bill"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_fab_add"
+        android:layout_margin="10dp"
+        android:layout_gravity="bottom|end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </FrameLayout>
