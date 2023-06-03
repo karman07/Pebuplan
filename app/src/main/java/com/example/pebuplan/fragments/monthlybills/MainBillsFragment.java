@@ -1,34 +1,33 @@
 package com.example.pebuplan.fragments.monthlybills;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.pebuplan.R;
 import com.example.pebuplan.activity.HomeActivity;
-import com.example.pebuplan.activity.MainActivity;
-import com.example.pebuplan.fragments.fgoal.GoalsAdapter;
+import com.example.pebuplan.adapter.MonthlyBillAdapter;
+import com.example.pebuplan.model.BudgetModel;
 import com.example.pebuplan.model.MonthlyBillModel;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Objects;
 
 
 public class MainBillsFragment extends Fragment implements UpdateBill{
@@ -38,8 +37,10 @@ public class MainBillsFragment extends Fragment implements UpdateBill{
     ImageView addMonthlyBills;
     RecyclerView monthlyBillRecyclerView;
 
-    ArrayList<MonthlyBillModel> monthlyBills = new ArrayList<>();
+    ArrayList<MonthlyBillModel> monthlyBills;
     MonthlyBillAdapter adapter;
+    SharedPreferences.Editor editor;
+    SharedPreferences preferences;
     public MainBillsFragment() {
 
     }
@@ -55,7 +56,16 @@ public class MainBillsFragment extends Fragment implements UpdateBill{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_bills, container, false);
+        preferences = getActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
+        editor = preferences.edit();
 
+        Gson gson = new Gson();
+        String json = preferences.getString("monthlyBills", null);
+        Type type = new TypeToken<ArrayList<MonthlyBillModel>>() {}.getType();
+        monthlyBills = gson.fromJson(json, type);
+        if (monthlyBills == null) {
+            monthlyBills = new ArrayList<>();
+        }
         back_image = view.findViewById(R.id.back_image);
         monthlyBillRecyclerView = view.findViewById(R.id.monthly_bill_recycler_view);
         addMonthlyBills = view.findViewById(R.id.add_monthly_bill);
@@ -90,6 +100,10 @@ public class MainBillsFragment extends Fragment implements UpdateBill{
     @Override
     public void update(MonthlyBillModel monthlyBillModel) {
         monthlyBills.add(monthlyBillModel);
-        adapter.updateList(monthlyBills);
+        adapter.update(monthlyBillModel);
+        Gson gson = new Gson();
+        String json = gson.toJson(monthlyBills);
+        editor.putString("monthlyBills", json);
+        editor.apply();
     }
 }

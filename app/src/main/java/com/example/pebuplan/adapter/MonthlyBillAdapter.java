@@ -1,4 +1,4 @@
-package com.example.pebuplan.fragments.monthlybills;
+package com.example.pebuplan.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +12,17 @@ import com.example.pebuplan.R;
 import com.example.pebuplan.model.MonthlyBillModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MonthlyBillAdapter extends RecyclerView.Adapter<MonthlyBillAdapter.ViewHolder> {
 
     ArrayList<MonthlyBillModel> monthlyBillList;
-    MonthlyBillAdapter(ArrayList<MonthlyBillModel> monthlyBill){
-        monthlyBillList = monthlyBill;
+    public MonthlyBillAdapter(ArrayList<MonthlyBillModel> monthlyBill){
+        if (monthlyBill.isEmpty()){
+            monthlyBillList = new ArrayList<>();
+        }else{
+            monthlyBillList = monthlyBill;
+        }
     }
     @NonNull
     @Override
@@ -40,9 +45,8 @@ public class MonthlyBillAdapter extends RecyclerView.Adapter<MonthlyBillAdapter.
         return monthlyBillList.size();
     }
 
-    public void updateList(ArrayList<MonthlyBillModel> newList){
-        monthlyBillList.clear();
-        monthlyBillList.addAll(newList);
+    public void update(MonthlyBillModel newData){
+        monthlyBillList.add(newData);
         notifyDataSetChanged();
     }
 
