@@ -19,7 +19,7 @@ public class GoalsAdapter extends FragmentStateAdapter {
             case 0:
                 return new DetailFragment();
             case 1:
-                return new DetailFragment();
+                return new RecordFragment();
             default:
                 return null;
         }
