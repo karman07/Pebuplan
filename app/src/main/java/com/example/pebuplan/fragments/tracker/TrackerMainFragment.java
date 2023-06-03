@@ -30,7 +30,6 @@ import java.util.Locale;
 
 public class TrackerMainFragment extends Fragment {
 
-    PieChart pieChart;
     ImageView back_image;
 
 
@@ -49,7 +48,6 @@ public class TrackerMainFragment extends Fragment {
                              Bundle savedInstanceState) {
         Log.d("TrackerMainFragment", "onCreateView called");
         View view = inflater.inflate(R.layout.fragment_tracker_main, container, false);
-        pieChart = view.findViewById(R.id.piechart);
 
         TabLayout tabLayout = view.findViewById(R.id.tabLayout);
 
@@ -58,11 +56,6 @@ public class TrackerMainFragment extends Fragment {
 
         tabLayout.addTab(firstTab);
         tabLayout.addTab(secondTab);
-
-        pieChart.addPieSlice(new PieModel(
-                "Income",
-                100,
-                Color.parseColor("#00FF00")));
 
 
         TextView title = view.findViewById(R.id.title);
@@ -101,7 +94,6 @@ public class TrackerMainFragment extends Fragment {
                         transaction.replace(R.id.fragment_container, fragment);
                         transaction.addToBackStack(null);
                         transaction.commit();
-                        spent();
                         break;
                     case 1:
                         TrackerExpensesFragment trackerExpensesFragment = new TrackerExpensesFragment();
@@ -109,33 +101,11 @@ public class TrackerMainFragment extends Fragment {
                         transactio.replace(R.id.fragment_container, trackerExpensesFragment);
                         transactio.addToBackStack(null);
                         transactio.commit();
-                        income();
                         break;
 
                 }
             }
 
-            private void spent() {
-                pieChart.clearChart();
-                pieChart.addPieSlice(new PieModel(
-                        "Income",
-                        100,
-                        Color.parseColor("#00FF00")));
-            }
-
-            private void income() {
-                String value = sharedPref.getString(monthNames[month] + "_spent", "0,0,0,0,0");
-
-                String[] numberList = value.split(",");
-
-                pieChart.clearChart();
-                for (int i = 0; i < numberList.length; i++) {
-                    pieChart.addPieSlice(new PieModel(
-                            "Food",
-                            Integer.parseInt(numberList[i].trim()),
-                            Color.parseColor(colours[i])));
-                }
-            }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {

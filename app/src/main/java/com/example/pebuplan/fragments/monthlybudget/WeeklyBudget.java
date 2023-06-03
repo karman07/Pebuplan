@@ -49,7 +49,7 @@ public class WeeklyBudget extends Fragment {
     int currentYear;
     ArrayList<BudgetModel> weeklyBillArrayList = new ArrayList<>();
 
-
+    HashMap<String, ArrayList<BudgetModel>> hashMap = new HashMap<>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,9 +77,10 @@ public class WeeklyBudget extends Fragment {
 
         Gson gson = new Gson();
         String storedHashMapString = preferences.getString("DayData", "oopsDintWork");
-        java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>(){}.getType();
-        HashMap<String, ArrayList<BudgetModel>> hashMap = gson.fromJson(storedHashMapString, type);
-
+        if (!storedHashMapString.equals("oopsDintWork")){
+            java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>(){}.getType();
+            hashMap = gson.fromJson(storedHashMapString, type);
+        }
         DateFormat dateFormat = new SimpleDateFormat("MMMM");
         Date date = new Date();
         for (int start=1;start<=7;start++){
@@ -201,7 +202,9 @@ public class WeeklyBudget extends Fragment {
                 adapter_week.updateRecyclerView(weeklyBillArrayList);
             }
         });
-
+        if (weeklyBillArrayList == null){
+            weeklyBillArrayList = new ArrayList<>();
+        }
         adapter_week = new MonthlyBudgetAdapter(weeklyBillArrayList);
         budget_rec_view_week = view.findViewById(R.id.rec_view_budget_week);
         budget_rec_view_week.setLayoutManager(new LinearLayoutManager(requireContext()));

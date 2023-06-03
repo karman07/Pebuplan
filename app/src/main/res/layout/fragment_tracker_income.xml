@@ -11,6 +11,48 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/timeline_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="May"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/backward_image_income"
+            android:layout_width="24dp"
+            android:layout_height="31dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/left_budget"
+            app:layout_constraintBottom_toBottomOf="@id/timeline_income"
+            app:layout_constraintEnd_toStartOf="@id/timeline_income"
+            app:layout_constraintTop_toTopOf="@id/timeline_income"/>
+
+        <ImageView
+            android:id="@+id/forward_image_income"
+            android:layout_width="24dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/right_budget"
+            app:layout_constraintBottom_toBottomOf="@id/timeline_income"
+            app:layout_constraintStart_toEndOf="@id/timeline_income"
+            app:layout_constraintTop_toTopOf="@id/timeline_income" />
+
+        <com.anychart.AnyChartView
+            android:id="@+id/pieChartIncome"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timeline_income"/>
+
+        <TextView
             android:id="@+id/textView17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -18,9 +60,10 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView10"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/pieChartIncome"/>
 
         <ImageView
             android:id="@+id/imageView10"

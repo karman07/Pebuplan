@@ -77,13 +77,15 @@ public class DayFragment extends Fragment implements UpdateBudgetTable{
         selectedDate = format.format(currentDate);
         Gson gson = new Gson();
         String storedHashMapString = preferences.getString("DayData", "oopsDintWork");
-        java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>(){}.getType();
-        HashMap<String, ArrayList<BudgetModel>> hashMap = gson.fromJson(storedHashMapString, type);
-        if (hashMap.get(selectedDate) != null) {
-            if (budgetBillsArrayList == null){
-                budgetBillsArrayList = new ArrayList<>();
+        if (!storedHashMapString.equals("oopsDintWork")){
+            java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>(){}.getType();
+            HashMap<String, ArrayList<BudgetModel>> hashMap = gson.fromJson(storedHashMapString, type);
+            if (hashMap.get(selectedDate) != null) {
+                if (budgetBillsArrayList == null){
+                    budgetBillsArrayList = new ArrayList<>();
+                }
+                budgetBillsArrayList = hashMap.get(selectedDate);
             }
-            budgetBillsArrayList = hashMap.get(selectedDate);
         }
 
         /* starts before 1 month from now */
@@ -138,6 +140,9 @@ public class DayFragment extends Fragment implements UpdateBudgetTable{
 
         budget_rec_view = view.findViewById(R.id.rec_view_budget);
         budget_rec_view.setLayoutManager(new LinearLayoutManager(requireContext()));
+        if (budgetBillsArrayList == null){
+            budgetBillsArrayList = new ArrayList<>();
+        }
         adapter = new MonthlyBudgetAdapter(budgetBillsArrayList);
         budget_rec_view.setAdapter(adapter);
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".fragments.tracker.TrackerExpensesFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,178 +11,46 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/timeline_expense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Food"
+            android:layout_marginTop="32dp"
+            android:text="May"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="42dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="28dp"
-            android:src="@drawable/food_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/textView17"
+            android:id="@+id/backward_image_expense"
+            android:layout_width="24dp"
+            android:layout_height="31dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/left_budget"
+            app:layout_constraintBottom_toBottomOf="@id/timeline_expense"
+            app:layout_constraintEnd_toStartOf="@id/timeline_expense"
+            app:layout_constraintTop_toTopOf="@id/timeline_expense"/>
+
+        <ImageView
+            android:id="@+id/forward_image_expense"
+            android:layout_width="24dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/right_budget"
+            app:layout_constraintBottom_toBottomOf="@id/timeline_expense"
+            app:layout_constraintStart_toEndOf="@id/timeline_expense"
+            app:layout_constraintTop_toTopOf="@id/timeline_expense" />
+
+        <com.anychart.AnyChartView
+            android:id="@+id/pieChartExpense"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView17" />
-        <TextView
-            android:id="@+id/salary_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="148dp"
-            android:text="$0.00"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView17"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.414"
-            app:layout_constraintStart_toEndOf="@+id/textView17"
-            app:layout_constraintTop_toTopOf="@+id/textView17" />
-
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="42dp"
-            android:layout_height="35dp"
-            android:src="@drawable/electricity_icon"
-            app:layout_constraintEnd_toStartOf="@+id/textView17"
-            app:layout_constraintStart_toStartOf="@+id/imageView10"
-            app:layout_constraintTop_toBottomOf="@+id/imageView10" />
-
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Electricity"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-            app:layout_constraintStart_toEndOf="@+id/imageView11"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
-
-        <TextView
-            android:id="@+id/transport_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$0.00"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView20"
-            app:layout_constraintEnd_toEndOf="@+id/salary_text"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/salary_text"
-            app:layout_constraintTop_toTopOf="@+id/textView20"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="42dp"
-            android:layout_height="35dp"
-            android:src="@drawable/water_icon"
-            app:layout_constraintEnd_toStartOf="@+id/textView20"
-            app:layout_constraintStart_toStartOf="@+id/imageView11"
-            app:layout_constraintTop_toBottomOf="@+id/imageView11" />
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Water"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView12"
-            app:layout_constraintStart_toEndOf="@+id/imageView11"
-            app:layout_constraintTop_toBottomOf="@+id/imageView11" />
-
-        <TextView
-            android:id="@+id/housing_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$0.00"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView22"
-            app:layout_constraintEnd_toEndOf="@+id/transport_text"
-            app:layout_constraintStart_toStartOf="@+id/transport_text"
-            app:layout_constraintTop_toTopOf="@+id/textView22" />
-
-        <ImageView
-            android:id="@+id/imageView14"
-            android:layout_width="42dp"
-            android:layout_height="35dp"
-            android:src="@drawable/house_icon"
-            app:layout_constraintEnd_toEndOf="@+id/imageView12"
-            app:layout_constraintStart_toStartOf="@+id/imageView12"
-            app:layout_constraintTop_toBottomOf="@+id/imageView12" />
-
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="House"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView14"
-            app:layout_constraintStart_toEndOf="@+id/imageView14"
-            app:layout_constraintTop_toBottomOf="@+id/imageView12" />
-
-        <TextView
-            android:id="@+id/utilities_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$0.00"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView24"
-            app:layout_constraintEnd_toEndOf="@+id/housing_text"
-            app:layout_constraintStart_toStartOf="@+id/housing_text"
-            app:layout_constraintTop_toTopOf="@+id/textView24" />
-
-        <ImageView
-            android:id="@+id/imageView15"
-            android:layout_width="42dp"
-            android:layout_height="35dp"
-            android:src="@drawable/gasolinr_icon"
-            app:layout_constraintEnd_toEndOf="@+id/imageView14"
-            app:layout_constraintStart_toStartOf="@+id/imageView14"
-            app:layout_constraintTop_toBottomOf="@+id/imageView14" />
-
-        <TextView
-            android:id="@+id/textView26"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gasoline"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView15"
-            app:layout_constraintStart_toEndOf="@+id/imageView14"
-            app:layout_constraintTop_toBottomOf="@+id/imageView14" />
-
-        <TextView
-            android:id="@+id/insuarance_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$0.00"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView26"
-            app:layout_constraintEnd_toEndOf="@+id/utilities_text"
-            app:layout_constraintStart_toStartOf="@+id/utilities_text"
-            app:layout_constraintTop_toTopOf="@+id/textView26" />
+            app:layout_constraintTop_toBottomOf="@id/timeline_expense"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

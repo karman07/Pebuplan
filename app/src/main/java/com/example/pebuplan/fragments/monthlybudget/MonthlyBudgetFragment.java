@@ -20,6 +20,7 @@ import android.content.SharedPreferences;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,6 +51,7 @@ public class MonthlyBudgetFragment extends Fragment {
 
     ImageView fab_month;
 
+    EditText incomeInput;
     MonthlyBudgetAdapter adapter_month;
     SharedPreferences.Editor editor;
     SharedPreferences preferences;
@@ -57,6 +59,7 @@ public class MonthlyBudgetFragment extends Fragment {
     int currentMonth;
     int currentDay;
     String selectedDate;
+    HashMap<String, ArrayList<BudgetModel>> hashMap = new HashMap<>();
 
     public MonthlyBudgetFragment() {
 
@@ -79,29 +82,30 @@ public class MonthlyBudgetFragment extends Fragment {
 
         Gson gson = new Gson();
         String storedHashMapString = preferences.getString("DayData", "oopsDintWork");
-        java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>(){}.getType();
-        HashMap<String, ArrayList<BudgetModel>> hashMap = gson.fromJson(storedHashMapString, type);
-
-        for (int start=1;start<=31;start++){
-            currentDay = start;
-            if (start/10 != 0 || start == 10) {
-                if (currentMonth / 10 != 0 || currentMonth == 10){
-                    selectedDate = currentYear + "-" + currentMonth + "-" + start;
-                }else {
-                    selectedDate = currentYear + "-" + "0" + currentMonth + "-" + start;
+        if (!storedHashMapString.equals("oopsDintWork")){
+            java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>(){}.getType();
+            hashMap = gson.fromJson(storedHashMapString, type);
+            for (int start=1;start<=31;start++){
+                currentDay = start;
+                if (start/10 != 0 || start == 10) {
+                    if (currentMonth / 10 != 0 || currentMonth == 10){
+                        selectedDate = currentYear + "-" + currentMonth + "-" + start;
+                    }else {
+                        selectedDate = currentYear + "-" + "0" + currentMonth + "-" + start;
+                    }
+                }else{
+                    if (currentMonth / 10 != 0 || currentMonth == 10){
+                        selectedDate = currentYear + "-" + currentMonth + "-" + "0" + start;
+                    }else {
+                        selectedDate = currentYear + "-" + "0" + currentMonth + "-" + "0" + start;
+                    }
                 }
-            }else{
-                if (currentMonth / 10 != 0 || currentMonth == 10){
-                    selectedDate = currentYear + "-" + currentMonth + "-" + "0" + start;
-                }else {
-                    selectedDate = currentYear + "-" + "0" + currentMonth + "-" + "0" + start;
+                if (hashMap.get(selectedDate) != null) {
+                    if (monthlyBillsArrayList == null){
+                        monthlyBillsArrayList = new ArrayList<>();
+                    }
+                    monthlyBillsArrayList.addAll(hashMap.get(selectedDate));
                 }
-            }
-            if (hashMap.get(selectedDate) != null) {
-                if (monthlyBillsArrayList == null){
-                    monthlyBillsArrayList = new ArrayList<>();
-                }
-                monthlyBillsArrayList.addAll(hashMap.get(selectedDate));
             }
         }
 
@@ -187,6 +191,10 @@ public class MonthlyBudgetFragment extends Fragment {
             }
         });
 
+        incomeInput = view.findViewById(R.id.incomeinput);
+        String income = incomeInput.getText().toString();
+        editor.putString("Income",income);
+        editor.commit();
 
         return view;
     }
@@ -194,6 +202,9 @@ public class MonthlyBudgetFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (monthlyBillsArrayList == null){
+            monthlyBillsArrayList = new ArrayList<>();
+        }
         adapter_month = new MonthlyBudgetAdapter(monthlyBillsArrayList);
         budget_rec_view_month = view.findViewById(R.id.rec_view_budget_month);
         budget_rec_view_month.setLayoutManager(new LinearLayoutManager(requireContext()));
