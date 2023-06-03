@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pebuplan.R;
@@ -17,6 +19,7 @@ import com.example.pebuplan.R;
 
 public class PinConfirmActivity extends AppCompatActivity {
 
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +32,26 @@ public class PinConfirmActivity extends AppCompatActivity {
         Button sign_in = findViewById(R.id.button4);
 
         TextView signwithfinger = findViewById(R.id.signwithfinger);
+        ImageView pinConfirmShow = findViewById(R.id.pinConfirmShow);
 
         signwithfinger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PinConfirmActivity.this, FingerPrintActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        pinConfirmShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(count == 0){
+                    pin_Code_box.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    count = 1;
+                }else{
+                    pin_Code_box.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    count = 0;
+                }
             }
         });
 

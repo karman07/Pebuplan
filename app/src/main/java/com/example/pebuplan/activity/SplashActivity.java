@@ -23,6 +23,8 @@ public class SplashActivity extends AppCompatActivity {
         SharedPreferences sharedPref = this.getSharedPreferences("plan", Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPref.edit();
+        editor.clear();
+        editor.apply();
 
         String value = sharedPref.getString("login", "default_value");
 

@@ -129,12 +129,21 @@
                         android:orientation="vertical">
 
 
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="15dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginTop="5dp">
 
+
+                            <View
+                                android:id="@+id/view3"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/dot_shape"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/income"
@@ -143,16 +152,28 @@
                                 android:paddingLeft="10dp"
                                 android:text="Income : 15%"
                                 android:textColor="#000000"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/view3"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                        </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="15dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginTop="5dp">
+
+                            <View
+                                android:id="@+id/view4"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/dot_shape_expenses"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/expenses"
@@ -161,16 +182,27 @@
                                 android:paddingLeft="10dp"
                                 android:text="Expenses : 25% "
                                 android:textColor="#000000"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/view4"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                        </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="15dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginTop="5dp">
 
+                            <View
+                                android:id="@+id/view5"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/dot_shape_savings"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/savings"
@@ -179,9 +211,12 @@
                                 android:paddingLeft="10dp"
                                 android:text="Savings : 10%  "
                                 android:textColor="#000000"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/view5"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                        </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>
 

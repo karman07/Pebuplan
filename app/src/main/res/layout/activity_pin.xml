@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -40,7 +41,7 @@
 
     <EditText
         android:id="@+id/pin_Code_box"
-        android:layout_width="352dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/green_bordered_edit_text"
@@ -54,11 +55,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintWidth_percent="0.7"
         app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
     <EditText
         android:id="@+id/pin_Code_confirm"
-        android:layout_width="352dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/green_bordered_edit_text"
@@ -71,6 +74,8 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/pin_Code_box"
         app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintWidth_percent="0.7"
         app:layout_constraintStart_toStartOf="@+id/pin_Code_box"
         app:layout_constraintTop_toBottomOf="@+id/pin_Code_box" />
 
@@ -83,4 +88,24 @@
         app:layout_constraintEnd_toEndOf="@+id/pin_Code_confirm"
         app:layout_constraintStart_toStartOf="@+id/pin_Code_confirm"
         app:layout_constraintTop_toBottomOf="@+id/pin_Code_confirm" />
+
+    <ImageView
+        android:id="@+id/pin_show"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pin_Code_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pin_Code_box"
+        app:layout_constraintTop_toTopOf="@+id/pin_Code_box"
+        app:srcCompat="@drawable/hide_password" />
+
+    <ImageView
+        android:id="@+id/pin_confirm_show"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pin_Code_confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pin_Code_confirm"
+        app:layout_constraintTop_toTopOf="@+id/pin_Code_confirm"
+        app:srcCompat="@drawable/hide_password" />
 </androidx.constraintlayout.widget.ConstraintLayout>

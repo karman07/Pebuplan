@@ -22,7 +22,7 @@
 
     <EditText
         android:id="@+id/pin_Code_box"
-        android:layout_width="352dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/green_bordered_edit_text"
@@ -33,10 +33,10 @@
         android:textColor="@color/green"
         android:textColorHint="@android:color/darker_gray"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+        app:layout_constraintEnd_toEndOf="@+id/imageView24"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintTop_toBottomOf="@+id/textView34"
+        app:layout_constraintWidth_percent="0.7" />
 
     <TextView
         android:id="@+id/textView35"
@@ -47,8 +47,8 @@
         android:textColor="#808080"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/pin_Code_box"
-        app:layout_constraintStart_toStartOf="@+id/pin_Code_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pin_Code_box" />
 
     <TextView
@@ -87,8 +87,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Sign In "
-        app:layout_constraintEnd_toEndOf="@+id/pin_Code_box"
-        app:layout_constraintStart_toStartOf="@+id/pin_Code_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signwithfinger" />
 
     <ImageView
@@ -101,4 +101,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
+
+    <ImageView
+        android:id="@+id/pinConfirmShow"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pin_Code_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pin_Code_box"
+        app:layout_constraintTop_toTopOf="@+id/pin_Code_box"
+        app:srcCompat="@drawable/hide_password" />
 </androidx.constraintlayout.widget.ConstraintLayout>

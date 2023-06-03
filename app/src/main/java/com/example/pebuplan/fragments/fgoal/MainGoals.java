@@ -60,13 +60,10 @@ public class MainGoals extends Fragment {
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {
                 case 0:
-                    tab.setText("Calculate");
-                    break;
-                case 1:
                     tab.setText("Detail");
                     break;
-                default:
-                    tab.setText("Review");
+                case 1:
+                    tab.setText("Record");
                     break;
             }
         }).attach();

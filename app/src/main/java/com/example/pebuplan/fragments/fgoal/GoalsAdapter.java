@@ -17,11 +17,9 @@ public class GoalsAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
          switch (position) {
             case 0:
-                return new CalculateGoals();
+                return new DetailFragment();
             case 1:
                 return new DetailFragment();
-            case 2:
-                return new ReviewFragment();
             default:
                 return null;
         }
@@ -29,7 +27,7 @@ public class GoalsAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 2;
     }
 }
 
