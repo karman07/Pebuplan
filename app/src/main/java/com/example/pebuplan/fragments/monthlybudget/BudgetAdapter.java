@@ -4,10 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.pebuplan.fragments.fgoal.CalculateGoals;
-import com.example.pebuplan.fragments.fgoal.DetailFragment;
-import com.example.pebuplan.fragments.fgoal.ReviewFragment;
-
 public class BudgetAdapter extends FragmentStateAdapter {
 
     public BudgetAdapter(Fragment fragment) {
@@ -21,9 +17,9 @@ public class BudgetAdapter extends FragmentStateAdapter {
             case 0:
                 return new DayFragment();
             case 1:
-                return new MonthlyBudget();
+                return new WeeklyBudget();
             case 2:
-                return new YearFragment();
+                return new MonthlyBudgetFragment();
             default:
                 return null;
         }
