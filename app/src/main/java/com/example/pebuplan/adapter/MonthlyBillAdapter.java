@@ -44,7 +44,7 @@ public class MonthlyBillAdapter extends RecyclerView.Adapter<MonthlyBillAdapter.
         holder.pay.setText(monthlyBillList.get(position).getPay());
         holder.debt.setText(monthlyBillList.get(position).getDebt());
         holder.status.setText(monthlyBillList.get(position).getStatus());
-        holder.category.addTextChangedListener(new TextWatcher() {
+        /*holder.category.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -139,7 +139,7 @@ public class MonthlyBillAdapter extends RecyclerView.Adapter<MonthlyBillAdapter.
             public void afterTextChanged(Editable editable) {
 
             }
-        });
+        });*/
     }
 
     @Override
@@ -153,7 +153,7 @@ public class MonthlyBillAdapter extends RecyclerView.Adapter<MonthlyBillAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        EditText category, amount, pay, debt, status;
+        TextView category, amount, pay, debt, status;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
