@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.pebuplan.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -38,7 +39,7 @@ public class RecordFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_record, container, false);
 
-        FloatingActionButton floatingActionButton = view.findViewById(R.id.fab);
+        ImageView floatingActionButton = view.findViewById(R.id.fab);
         recyclerView = view.findViewById(R.id.recyclerView2);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 

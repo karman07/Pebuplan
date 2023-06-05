@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.pebuplan.adapter.MonthlyBillAdapter;
 import com.example.pebuplan.adapter.MonthlyBudgetAdapter;
@@ -50,6 +51,7 @@ public class DayFragment extends Fragment implements UpdateBudgetTable{
     SharedPreferences.Editor editor;
     SharedPreferences preferences;
     MonthlyBudgetAdapter adapter;
+    TextView totalBudget, totalSpent, totalRemains;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,7 +130,7 @@ public class DayFragment extends Fragment implements UpdateBudgetTable{
             }
         });
 
-        fab = view.findViewById(R.id.fab);
+        fab = view.findViewById(R.id.fab_day);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +159,18 @@ public class DayFragment extends Fragment implements UpdateBudgetTable{
                 editor.apply();
             }
         });
+        totalBudget = view.findViewById(R.id.budget_total);
+        totalSpent = view.findViewById(R.id.spents_total);
+        totalRemains = view.findViewById(R.id.remains_total);
+        int sumOfBudget = 0;
+        int sumOfSpent = 0;
+        for (int start=0;start<budgetBillsArrayList.size();start++){
+            sumOfBudget += Integer.parseInt(budgetBillsArrayList.get(start).getBudget());
+            sumOfSpent += Integer.parseInt(budgetBillsArrayList.get(start).getSpent());
+        }
+        totalBudget.setText(String.valueOf(sumOfBudget));
+        totalSpent.setText(String.valueOf(sumOfSpent));
+        totalRemains.setText(String.valueOf((sumOfBudget-sumOfSpent)));
     }
 
 

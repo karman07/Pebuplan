@@ -36,10 +36,6 @@
                 android:title="Security" />
 
             <item
-                android:id="@+id/nav_remainder"
-                android:title="Notifications" />
-
-            <item
                 android:id="@+id/nav_h_and_p"
                 android:title="Help and Support" />
         </menu>

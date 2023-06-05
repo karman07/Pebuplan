@@ -276,9 +276,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_security) {
             intent.putExtra("FragDetails", "nav_security");
             startActivity(intent);
-        } else if (id == R.id.nav_remainder){
-            intent.putExtra("FragDetails", "nav_remainder");
-            startActivity(intent);
         } else if (id == R.id.nav_h_and_p) {
             intent.putExtra("FragDetails", "nav_h_and_p");
             startActivity(intent);

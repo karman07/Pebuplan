@@ -48,6 +48,7 @@ public class MonthlyBudgetAdapter extends RecyclerView.Adapter<MonthlyBudgetAdap
                 String txt_budget = holder.budget.getText().toString();
                 BudgetModel bm = BudgetList.get(holder.getAdapterPosition());
                 bm.setBudget(txt_budget);
+                setNewRemain(holder);
             }
 
             @Override
@@ -66,6 +67,7 @@ public class MonthlyBudgetAdapter extends RecyclerView.Adapter<MonthlyBudgetAdap
                 String txt_category = holder.category.getText().toString();
                 BudgetModel bm = BudgetList.get(holder.getAdapterPosition());
                 bm.setCategory(txt_category);
+                setNewRemain(holder);
             }
 
             @Override
@@ -93,26 +95,14 @@ public class MonthlyBudgetAdapter extends RecyclerView.Adapter<MonthlyBudgetAdap
             }
         });
 
-        holder.remain.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String txt_remain = holder.remain.getText().toString();
-                BudgetModel bm = BudgetList.get(holder.getAdapterPosition());
-                bm.setCategory(txt_remain);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+        int remains = Integer.parseInt(holder.budget.getText().toString()) - Integer.parseInt(holder.spent.getText().toString());
+        holder.remain.setText(String.valueOf(remains));
     }
 
+    void setNewRemain(ViewHolder holder){
+        int remains = Integer.parseInt(holder.budget.getText().toString()) - Integer.parseInt(holder.spent.getText().toString());
+        holder.remain.setText(String.valueOf(remains));
+    }
     @Override
     public int getItemCount() {
         return BudgetList.size();

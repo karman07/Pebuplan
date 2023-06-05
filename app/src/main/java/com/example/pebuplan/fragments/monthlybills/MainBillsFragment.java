@@ -6,21 +6,26 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pebuplan.R;
 import com.example.pebuplan.activity.HomeActivity;
 import com.example.pebuplan.adapter.MonthlyBillAdapter;
+import com.example.pebuplan.adapter.UpdateList;
 import com.example.pebuplan.model.BudgetModel;
 import com.example.pebuplan.model.MonthlyBillModel;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -30,7 +35,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 
-public class MainBillsFragment extends Fragment implements UpdateBill{
+public class MainBillsFragment extends Fragment implements UpdateBill, UpdateList {
 
 
     ImageView back_image;
@@ -41,6 +46,8 @@ public class MainBillsFragment extends Fragment implements UpdateBill{
     MonthlyBillAdapter adapter;
     SharedPreferences.Editor editor;
     SharedPreferences preferences;
+    Button saveBill;
+
     public MainBillsFragment() {
 
     }
@@ -61,7 +68,8 @@ public class MainBillsFragment extends Fragment implements UpdateBill{
 
         Gson gson = new Gson();
         String json = preferences.getString("monthlyBills", null);
-        Type type = new TypeToken<ArrayList<MonthlyBillModel>>() {}.getType();
+        Type type = new TypeToken<ArrayList<MonthlyBillModel>>() {
+        }.getType();
         monthlyBills = gson.fromJson(json, type);
         if (monthlyBills == null) {
             monthlyBills = new ArrayList<>();
@@ -82,8 +90,20 @@ public class MainBillsFragment extends Fragment implements UpdateBill{
         });
 
         monthlyBillRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adapter = new MonthlyBillAdapter(monthlyBills);
+        adapter = new MonthlyBillAdapter(monthlyBills,this);
         monthlyBillRecyclerView.setAdapter(adapter);
+
+        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(requireContext()) {
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                MonthlyBillModel deletedBill = monthlyBills.get(viewHolder.getAdapterPosition());
+                deleteBill(deletedBill);
+                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+            }
+        };
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
+        itemTouchhelper.attachToRecyclerView(monthlyBillRecyclerView);
+
         Dialog dialog = new Dialog(requireContext());
         addMonthlyBills.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +114,17 @@ public class MainBillsFragment extends Fragment implements UpdateBill{
 
         });
         dialog.show();
+        saveBill = view.findViewById(R.id.save_bill);
+        saveBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Gson gson = new Gson();
+                String billsData = gson.toJson(monthlyBills);
+                editor.putString("monthlyBills", billsData);
+                editor.apply();
+
+            }
+        });
         return view;
     }
 
@@ -105,5 +136,18 @@ public class MainBillsFragment extends Fragment implements UpdateBill{
         String json = gson.toJson(monthlyBills);
         editor.putString("monthlyBills", json);
         editor.apply();
+    }
+
+    public void deleteBill(MonthlyBillModel monthlyBillModel) {
+        monthlyBills.remove(monthlyBillModel);
+        Gson gson = new Gson();
+        String json = gson.toJson(monthlyBills);
+        editor.putString("monthlyBills", json);
+        editor.apply();
+    }
+
+    @Override
+    public void updateList(MonthlyBillModel monthlyBillModel, int position) {
+        monthlyBills.add(position, monthlyBillModel);
     }
 }

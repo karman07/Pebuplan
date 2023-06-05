@@ -4,9 +4,9 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <TextView
-            android:id="@+id/category"
-            android:layout_width="0dp"
+        <EditText
+            android:id="@+id/category_bill"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="Categories"
@@ -14,36 +14,36 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
+        <EditText
             android:id="@+id/amount"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Amount"
             app:layout_constraintTop_toTopOf="@id/category"
             app:layout_constraintStart_toEndOf="@id/category"
             app:layout_constraintEnd_toStartOf="@id/pay"/>
 
-        <TextView
+        <EditText
             android:id="@+id/pay"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pay"
             app:layout_constraintEnd_toStartOf="@id/debt"
             app:layout_constraintTop_toTopOf="@id/amount"
             app:layout_constraintStart_toEndOf="@id/amount"/>
 
-        <TextView
+        <EditText
             android:id="@+id/debt"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Debt"
             app:layout_constraintEnd_toStartOf="@id/status"
             app:layout_constraintStart_toEndOf="@id/pay"
             app:layout_constraintTop_toTopOf="@id/pay"/>
 
-        <TextView
+        <EditText
             android:id="@+id/status"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Status"
             app:layout_constraintEnd_toEndOf="parent"

@@ -59,6 +59,7 @@ public class MonthlyBudgetFragment extends Fragment {
     int currentMonth;
     int currentDay;
     String selectedDate;
+    TextView totalBudget, totalSpent;
     HashMap<String, ArrayList<BudgetModel>> hashMap = new HashMap<>();
 
     public MonthlyBudgetFragment() {
@@ -209,5 +210,16 @@ public class MonthlyBudgetFragment extends Fragment {
         budget_rec_view_month = view.findViewById(R.id.rec_view_budget_month);
         budget_rec_view_month.setLayoutManager(new LinearLayoutManager(requireContext()));
         budget_rec_view_month.setAdapter(adapter_month);
+
+        totalBudget = view.findViewById(R.id.budget_total_month);
+        totalSpent = view.findViewById(R.id.spents_total_month);
+        int sumOfBudget = 0;
+        int sumOfSpent = 0;
+        for (int start=0;start<monthlyBillsArrayList.size();start++){
+            sumOfBudget += Integer.parseInt(monthlyBillsArrayList.get(start).getBudget());
+            sumOfSpent += Integer.parseInt(monthlyBillsArrayList.get(start).getSpent());
+        }
+        totalBudget.setText(String.valueOf(sumOfBudget));
+        totalSpent.setText(String.valueOf(sumOfSpent));
     }
 }

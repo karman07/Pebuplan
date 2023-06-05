@@ -44,6 +44,7 @@ public class WeeklyBudget extends Fragment {
     MonthlyBudgetAdapter adapter_week;
     SharedPreferences.Editor editor;
     SharedPreferences preferences;
+    TextView totalSpent,totalBudget;
     int currentDay;
     int currentMonth;
     int currentYear;
@@ -210,6 +211,16 @@ public class WeeklyBudget extends Fragment {
         budget_rec_view_week.setLayoutManager(new LinearLayoutManager(requireContext()));
         budget_rec_view_week.setAdapter(adapter_week);
 
+        totalBudget = view.findViewById(R.id.budget_total_week);
+        totalSpent = view.findViewById(R.id.spents_total_week);
+        int sumOfBudget = 0;
+        int sumOfSpent = 0;
+        for (int start=0;start<weeklyBillArrayList.size();start++){
+            sumOfBudget += Integer.parseInt(weeklyBillArrayList.get(start).getBudget());
+            sumOfSpent += Integer.parseInt(weeklyBillArrayList.get(start).getSpent());
+        }
+        totalBudget.setText(String.valueOf(sumOfBudget));
+        totalSpent.setText(String.valueOf(sumOfSpent));
     }
 
 }
