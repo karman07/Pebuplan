@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 
-public class MainBillsFragment extends Fragment implements UpdateBill, UpdateList {
+public class MainBillsFragment extends Fragment implements UpdateBill {
 
 
     ImageView back_image;
@@ -90,7 +90,7 @@ public class MainBillsFragment extends Fragment implements UpdateBill, UpdateLis
         });
 
         monthlyBillRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adapter = new MonthlyBillAdapter(monthlyBills,this);
+        adapter = new MonthlyBillAdapter(monthlyBills);
         monthlyBillRecyclerView.setAdapter(adapter);
 
         SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(requireContext()) {
@@ -104,7 +104,7 @@ public class MainBillsFragment extends Fragment implements UpdateBill, UpdateLis
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
         itemTouchhelper.attachToRecyclerView(monthlyBillRecyclerView);
 
-        Dialog dialog = new Dialog(requireContext());
+//        Dialog dialog = new Dialog(requireContext());
         addMonthlyBills.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,7 +113,7 @@ public class MainBillsFragment extends Fragment implements UpdateBill, UpdateLis
             }
 
         });
-        dialog.show();
+//        dialog.show();
         saveBill = view.findViewById(R.id.save_bill);
         saveBill.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +121,7 @@ public class MainBillsFragment extends Fragment implements UpdateBill, UpdateLis
                 Gson gson = new Gson();
                 String billsData = gson.toJson(monthlyBills);
                 editor.putString("monthlyBills", billsData);
-                editor.apply();
+                editor.commit();
 
             }
         });
@@ -131,7 +131,7 @@ public class MainBillsFragment extends Fragment implements UpdateBill, UpdateLis
     @Override
     public void update(MonthlyBillModel monthlyBillModel) {
         monthlyBills.add(monthlyBillModel);
-        adapter.update(monthlyBillModel);
+        adapter.update(monthlyBills);
         Gson gson = new Gson();
         String json = gson.toJson(monthlyBills);
         editor.putString("monthlyBills", json);
@@ -146,8 +146,8 @@ public class MainBillsFragment extends Fragment implements UpdateBill, UpdateLis
         editor.apply();
     }
 
-    @Override
-    public void updateList(MonthlyBillModel monthlyBillModel, int position) {
-        monthlyBills.add(position, monthlyBillModel);
-    }
+//    @Override
+//    public void updateList(MonthlyBillModel monthlyBillModel, int position) {
+//        monthlyBills.add(position, monthlyBillModel);
+//    }
 }

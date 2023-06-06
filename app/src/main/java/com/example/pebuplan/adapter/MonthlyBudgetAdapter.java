@@ -14,6 +14,7 @@ import com.example.pebuplan.R;
 import com.example.pebuplan.model.BudgetModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MonthlyBudgetAdapter extends RecyclerView.Adapter<MonthlyBudgetAdapter.ViewHolder> {
 
@@ -86,7 +87,7 @@ public class MonthlyBudgetAdapter extends RecyclerView.Adapter<MonthlyBudgetAdap
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String txt_spent = holder.spent.getText().toString();
                 BudgetModel bm = BudgetList.get(holder.getAdapterPosition());
-                bm.setCategory(txt_spent);
+                bm.setSpent(txt_spent);
             }
 
             @Override
@@ -108,8 +109,8 @@ public class MonthlyBudgetAdapter extends RecyclerView.Adapter<MonthlyBudgetAdap
         return BudgetList.size();
     }
 
-    public void update(BudgetModel newData){
-        BudgetList.add(newData);
+    public void update(ArrayList<BudgetModel> budgetModelList){
+        this.BudgetList = budgetModelList;
         notifyDataSetChanged();
     }
 

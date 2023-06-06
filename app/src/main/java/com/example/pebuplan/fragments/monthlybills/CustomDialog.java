@@ -17,8 +17,6 @@ public class CustomDialog extends Dialog {
     EditText category;
     EditText amount;
     EditText pay;
-    EditText debt;
-    EditText status;
     UpdateBill updateBill;
 
     Button add;
@@ -37,8 +35,6 @@ public class CustomDialog extends Dialog {
         category = findViewById(R.id.category_et);
         amount = findViewById(R.id.amount_et);
         pay = findViewById(R.id.pay_et);
-        debt = findViewById(R.id.debt_et);
-        status = findViewById(R.id.status_et);
         add = findViewById(R.id.add_bill);
 
         add.setOnClickListener(new View.OnClickListener() {
@@ -47,9 +43,7 @@ public class CustomDialog extends Dialog {
                 updateBill.update(new MonthlyBillModel(
                         category.getText().toString(),
                         amount.getText().toString(),
-                        pay.getText().toString(),
-                        debt.getText().toString(),
-                        status.getText().toString()
+                        pay.getText().toString()
                 ));
                 dismiss();
             }

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,27 +31,29 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-public class WeeklyBudget extends Fragment {
+public class WeeklyBudget extends Fragment implements UpdateBudgetTable{
 
 
     TextView curr_month1, curr_month2, curr_month3, curr_month4;
     String current_month;
     LinearLayout ll_week1, ll_week2, ll_week3, ll_week4;
     View select_view1, select_view2, select_view3, select_view4;
-
+    Button saveWeekBudget;
     RecyclerView budget_rec_view_week;
     ImageView fab;
+    String selectedDate = "week1";
 
     MonthlyBudgetAdapter adapter_week;
     SharedPreferences.Editor editor;
     SharedPreferences preferences;
-    TextView totalSpent,totalBudget;
+    TextView totalSpent,totalBudget,totalRemains;
     int currentDay;
     int currentMonth;
     int currentYear;
     ArrayList<BudgetModel> weeklyBillArrayList = new ArrayList<>();
 
     HashMap<String, ArrayList<BudgetModel>> hashMap = new HashMap<>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,28 +75,17 @@ public class WeeklyBudget extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        totalBudget = view.findViewById(R.id.budget_total_week);
+        totalSpent = view.findViewById(R.id.spents_total_week);
+        totalRemains = view.findViewById(R.id.remains_total_week);
         Calendar calendar = Calendar.getInstance();
         currentYear = calendar.get(Calendar.YEAR);
         currentMonth = calendar.get(Calendar.MONTH) + 1;
 
-        Gson gson = new Gson();
-        String storedHashMapString = preferences.getString("DayData", "oopsDintWork");
-        if (!storedHashMapString.equals("oopsDintWork")){
-            java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>(){}.getType();
-            hashMap = gson.fromJson(storedHashMapString, type);
-        }
+        getWeekData("week1");
         DateFormat dateFormat = new SimpleDateFormat("MMMM");
         Date date = new Date();
-        for (int start=1;start<=7;start++){
-            currentDay = start;
-            String selectedDate = currentYear + "-" + "0" + currentMonth + "-" + "0" + start;
-            if (hashMap.get(selectedDate) != null) {
-                if (weeklyBillArrayList == null){
-                    weeklyBillArrayList = new ArrayList<>();
-                }
-                weeklyBillArrayList.addAll(hashMap.get(selectedDate));
-            }
-        }
+
 
         current_month = dateFormat.format(date);
 
@@ -117,6 +109,16 @@ public class WeeklyBudget extends Fragment {
         select_view3 = view.findViewById(R.id.select_Week3);
         select_view4 = view.findViewById(R.id.select_Week4);
 
+        int sumOfBudget = 0;
+        int sumOfSpent = 0;
+        for (int start=0;start<weeklyBillArrayList.size();start++){
+            sumOfBudget += Integer.parseInt(weeklyBillArrayList.get(start).getBudget());
+            sumOfSpent += Integer.parseInt(weeklyBillArrayList.get(start).getSpent());
+        }
+        totalBudget.setText(String.valueOf(sumOfBudget));
+        totalSpent.setText(String.valueOf(sumOfSpent));
+        totalRemains.setText(String.valueOf((sumOfBudget-sumOfSpent)));
+
         ll_week1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,17 +126,28 @@ public class WeeklyBudget extends Fragment {
                 select_view2.setVisibility(View.INVISIBLE);
                 select_view3.setVisibility(View.INVISIBLE);
                 select_view4.setVisibility(View.INVISIBLE);
-                for (int start=1;start<=7;start++){
-                    currentDay = start;
-                    String selectedDate = currentYear + "-" + "0" + currentMonth + "-" + "0" + start;
-                    if (hashMap.get(selectedDate) != null) {
+                selectedDate = "week1";
+                getWeekData(selectedDate);
+                if (hashMap.get(selectedDate) != null) {
                         if (weeklyBillArrayList == null){
                             weeklyBillArrayList = new ArrayList<>();
                         }
-                        weeklyBillArrayList.addAll(hashMap.get(selectedDate));
-                    }
+                        weeklyBillArrayList = hashMap.get(selectedDate);
+                        adapter_week.updateRecyclerView(weeklyBillArrayList);
+                    }else{
+                        weeklyBillArrayList = new ArrayList<>();
+                        adapter_week.updateRecyclerView(weeklyBillArrayList);
                 }
-                adapter_week.updateRecyclerView(weeklyBillArrayList);
+
+                int sumOfBudget = 0;
+                int sumOfSpent = 0;
+                for (int start=0;start<weeklyBillArrayList.size();start++){
+                    sumOfBudget += Integer.parseInt(weeklyBillArrayList.get(start).getBudget());
+                    sumOfSpent += Integer.parseInt(weeklyBillArrayList.get(start).getSpent());
+                }
+                totalBudget.setText(String.valueOf(sumOfBudget));
+                totalSpent.setText(String.valueOf(sumOfSpent));
+                totalRemains.setText(String.valueOf((sumOfBudget-sumOfSpent)));
             }
         });
 
@@ -146,17 +159,28 @@ public class WeeklyBudget extends Fragment {
                 select_view3.setVisibility(View.INVISIBLE);
                 select_view4.setVisibility(View.INVISIBLE);
                 weeklyBillArrayList.clear();
-                for (int start=8;start<=14;start++){
-                    currentDay = start;
-                    String selectedDate = currentYear + "-" + "0" + currentMonth + "-" + "0" + start;
-                    if (hashMap.get(selectedDate) != null) {
-                        if (weeklyBillArrayList == null){
-                            weeklyBillArrayList = new ArrayList<>();
-                        }
-                        weeklyBillArrayList.addAll(hashMap.get(selectedDate));
+
+                selectedDate = "week2";
+                getWeekData(selectedDate);
+                if (hashMap.get(selectedDate) != null) {
+                    if (weeklyBillArrayList == null){
+                        weeklyBillArrayList = new ArrayList<>();
                     }
+                    weeklyBillArrayList = hashMap.get(selectedDate);
+                    adapter_week.updateRecyclerView(weeklyBillArrayList);
+                }else{
+                    weeklyBillArrayList = new ArrayList<>();
+                    adapter_week.updateRecyclerView(weeklyBillArrayList);
                 }
-                adapter_week.updateRecyclerView(weeklyBillArrayList);
+                int sumOfBudget = 0;
+                int sumOfSpent = 0;
+                for (int start=0;start<weeklyBillArrayList.size();start++){
+                    sumOfBudget += Integer.parseInt(weeklyBillArrayList.get(start).getBudget());
+                    sumOfSpent += Integer.parseInt(weeklyBillArrayList.get(start).getSpent());
+                }
+                totalBudget.setText(String.valueOf(sumOfBudget));
+                totalSpent.setText(String.valueOf(sumOfSpent));
+                totalRemains.setText(String.valueOf((sumOfBudget-sumOfSpent)));
             }
         });
 
@@ -168,17 +192,28 @@ public class WeeklyBudget extends Fragment {
                 select_view3.setVisibility(View.VISIBLE);
                 select_view4.setVisibility(View.INVISIBLE);
                 weeklyBillArrayList.clear();
-                for (int start=15;start<=21;start++){
-                    currentDay = start;
-                    String selectedDate = currentYear + "-" + "0" + currentMonth + "-" + "0" + start;
-                    if (hashMap.get(selectedDate) != null) {
-                        if (weeklyBillArrayList == null){
-                            weeklyBillArrayList = new ArrayList<>();
-                        }
-                        weeklyBillArrayList.addAll(hashMap.get(selectedDate));
+
+                selectedDate = "week3";
+                getWeekData(selectedDate);
+                if (hashMap.get(selectedDate) != null) {
+                    if (weeklyBillArrayList == null){
+                        weeklyBillArrayList = new ArrayList<>();
                     }
+                    weeklyBillArrayList = hashMap.get(selectedDate);
+                    adapter_week.updateRecyclerView(weeklyBillArrayList);
+                }else{
+                    weeklyBillArrayList = new ArrayList<>();
+                    adapter_week.updateRecyclerView(weeklyBillArrayList);
                 }
-                adapter_week.updateRecyclerView(weeklyBillArrayList);
+                int sumOfBudget = 0;
+                int sumOfSpent = 0;
+                for (int start=0;start<weeklyBillArrayList.size();start++){
+                    sumOfBudget += Integer.parseInt(weeklyBillArrayList.get(start).getBudget());
+                    sumOfSpent += Integer.parseInt(weeklyBillArrayList.get(start).getSpent());
+                }
+                totalBudget.setText(String.valueOf(sumOfBudget));
+                totalSpent.setText(String.valueOf(sumOfSpent));
+                totalRemains.setText(String.valueOf((sumOfBudget-sumOfSpent)));
             }
         });
 
@@ -190,17 +225,28 @@ public class WeeklyBudget extends Fragment {
                 select_view3.setVisibility(View.INVISIBLE);
                 select_view4.setVisibility(View.VISIBLE);
                 weeklyBillArrayList.clear();
-                for (int start=22;start<=28;start++){
-                    currentDay = start;
-                    String selectedDate = currentYear + "-" + "0" + currentMonth + "-" + "0" + start;
-                    if (hashMap.get(selectedDate) != null) {
-                        if (weeklyBillArrayList == null){
-                            weeklyBillArrayList = new ArrayList<>();
-                        }
-                        weeklyBillArrayList.addAll(hashMap.get(selectedDate));
+
+                selectedDate = "week4";
+                getWeekData(selectedDate);
+                if (hashMap.get(selectedDate) != null) {
+                    if (weeklyBillArrayList == null){
+                        weeklyBillArrayList = new ArrayList<>();
                     }
+                    weeklyBillArrayList = hashMap.get(selectedDate);
+                    adapter_week.updateRecyclerView(weeklyBillArrayList);
+                }else{
+                    weeklyBillArrayList = new ArrayList<>();
+                    adapter_week.updateRecyclerView(weeklyBillArrayList);
                 }
-                adapter_week.updateRecyclerView(weeklyBillArrayList);
+                int sumOfBudget = 0;
+                int sumOfSpent = 0;
+                for (int start=0;start<weeklyBillArrayList.size();start++){
+                    sumOfBudget += Integer.parseInt(weeklyBillArrayList.get(start).getBudget());
+                    sumOfSpent += Integer.parseInt(weeklyBillArrayList.get(start).getSpent());
+                }
+                totalBudget.setText(String.valueOf(sumOfBudget));
+                totalSpent.setText(String.valueOf(sumOfSpent));
+                totalRemains.setText(String.valueOf((sumOfBudget-sumOfSpent)));
             }
         });
         if (weeklyBillArrayList == null){
@@ -211,16 +257,52 @@ public class WeeklyBudget extends Fragment {
         budget_rec_view_week.setLayoutManager(new LinearLayoutManager(requireContext()));
         budget_rec_view_week.setAdapter(adapter_week);
 
-        totalBudget = view.findViewById(R.id.budget_total_week);
-        totalSpent = view.findViewById(R.id.spents_total_week);
-        int sumOfBudget = 0;
-        int sumOfSpent = 0;
-        for (int start=0;start<weeklyBillArrayList.size();start++){
-            sumOfBudget += Integer.parseInt(weeklyBillArrayList.get(start).getBudget());
-            sumOfSpent += Integer.parseInt(weeklyBillArrayList.get(start).getSpent());
-        }
-        totalBudget.setText(String.valueOf(sumOfBudget));
-        totalSpent.setText(String.valueOf(sumOfSpent));
+
+        fab = view.findViewById(R.id.fab_week);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BudgetCustomDialog cd = new BudgetCustomDialog(requireActivity(), WeeklyBudget.this);
+                cd.show();
+            }
+        });
+
+        saveWeekBudget = view.findViewById(R.id.saveWeek);
+        saveWeekBudget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hashMap.put(selectedDate,weeklyBillArrayList);
+                Gson gson = new Gson();
+                String hashMapString = gson.toJson(hashMap);
+                editor.putString("WeekData", hashMapString);
+                editor.apply();
+            }
+        });
+
     }
 
+    private void getWeekData(String selectedDate) {
+        Gson gson = new Gson();
+        String storedHashMapString = preferences.getString("WeekData", "oopsDintWork");
+        if (!storedHashMapString.equals("oopsDintWork")){
+            java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>(){}.getType();
+            hashMap = gson.fromJson(storedHashMapString, type);
+            if (hashMap.get(selectedDate) != null) {
+                if (weeklyBillArrayList == null){
+                    weeklyBillArrayList = new ArrayList<>();
+                }
+                weeklyBillArrayList = hashMap.get(selectedDate);
+            }
+        }
+    }
+
+    @Override
+    public void update(BudgetModel budgetModel) {
+        if (weeklyBillArrayList == null){
+            weeklyBillArrayList = new ArrayList<>();
+        }
+        weeklyBillArrayList.add(budgetModel);
+        adapter_week.update(weeklyBillArrayList);
+    }
 }

@@ -16,6 +16,12 @@ public class MonthlyBillModel {
         this.status = status;
     }
 
+    public MonthlyBillModel(String category, String amount, String pay) {
+        this.category = category;
+        this.amount = amount;
+        this.pay = pay;
+    }
+
     public String getCategory() {
         return category;
     }

@@ -43,7 +43,7 @@
             app:layout_constraintStart_toEndOf="@id/timeline_income"
             app:layout_constraintTop_toTopOf="@id/timeline_income" />
 
-        <com.anychart.AnyChartView
+        <org.eazegraph.lib.charts.PieChart
             android:id="@+id/pieChartIncome"
             android:layout_width="300dp"
             android:layout_height="300dp"

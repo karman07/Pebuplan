@@ -42,15 +42,16 @@ public class DayFragment extends Fragment implements UpdateBudgetTable{
 
 
     RecyclerView budget_rec_view;
-    ArrayList<BudgetModel> budgetBillsArrayList;
+    ArrayList<BudgetModel> budgetBillsArrayList = new ArrayList<>();
     ImageView fab;
     Button saveBudget;
     String selectedDate;
     Date currentDate;
-    HashMap<String, ArrayList<BudgetModel>> dayData = new HashMap<>();
     SharedPreferences.Editor editor;
     SharedPreferences preferences;
     MonthlyBudgetAdapter adapter;
+    HashMap<String, ArrayList<BudgetModel>> hashMap = new HashMap<>();
+
     TextView totalBudget, totalSpent, totalRemains;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,19 +78,21 @@ public class DayFragment extends Fragment implements UpdateBudgetTable{
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         currentDate = Calendar.getInstance().getTime();
         selectedDate = format.format(currentDate);
-        Gson gson = new Gson();
-        String storedHashMapString = preferences.getString("DayData", "oopsDintWork");
-        if (!storedHashMapString.equals("oopsDintWork")){
-            java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>(){}.getType();
-            HashMap<String, ArrayList<BudgetModel>> hashMap = gson.fromJson(storedHashMapString, type);
-            if (hashMap.get(selectedDate) != null) {
-                if (budgetBillsArrayList == null){
-                    budgetBillsArrayList = new ArrayList<>();
-                }
-                budgetBillsArrayList = hashMap.get(selectedDate);
-            }
-        }
+        getDayData(selectedDate);
 
+        totalBudget = view.findViewById(R.id.budget_total);
+        totalSpent = view.findViewById(R.id.spents_total);
+        totalRemains = view.findViewById(R.id.remains_total);
+
+        int sumOfBudget = 0;
+        int sumOfSpent = 0;
+        for (int start=0;start<budgetBillsArrayList.size();start++){
+            sumOfBudget += Integer.parseInt(budgetBillsArrayList.get(start).getBudget());
+            sumOfSpent += Integer.parseInt(budgetBillsArrayList.get(start).getSpent());
+        }
+        totalBudget.setText(String.valueOf(sumOfBudget));
+        totalSpent.setText(String.valueOf(sumOfSpent));
+        totalRemains.setText(String.valueOf((sumOfBudget-sumOfSpent)));
         /* starts before 1 month from now */
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.MONTH, -1);
@@ -118,15 +121,31 @@ public class DayFragment extends Fragment implements UpdateBudgetTable{
                 selectedDate = format.format(selDate);
                 Gson gson = new Gson();
                 String storedHashMapString = preferences.getString("DayData", "oopsDintWork");
-                java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>(){}.getType();
-                HashMap<String, ArrayList<BudgetModel>> hashMap = gson.fromJson(storedHashMapString, type);
-                if (budgetBillsArrayList != null && hashMap.get(selectedDate) != null) {
-                    budgetBillsArrayList = hashMap.get(selectedDate);
-                    adapter.updateRecyclerView(budgetBillsArrayList);
-                }else{
-                   budgetBillsArrayList = new ArrayList<>();
-                   adapter.updateRecyclerView(budgetBillsArrayList);
+                if(!storedHashMapString.equals("oopsDintWork")){
+                    java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>(){}.getType();
+                    HashMap<String, ArrayList<BudgetModel>> hashMap = gson.fromJson(storedHashMapString, type);
+                    if (budgetBillsArrayList != null && hashMap.get(selectedDate) != null) {
+                        budgetBillsArrayList = hashMap.get(selectedDate);
+                        adapter.updateRecyclerView(budgetBillsArrayList);
+                        int sumOfBudget = 0;
+                        int sumOfSpent = 0;
+                        for (int start=0;start<budgetBillsArrayList.size();start++){
+                            sumOfBudget += Integer.parseInt(budgetBillsArrayList.get(start).getBudget());
+                            sumOfSpent += Integer.parseInt(budgetBillsArrayList.get(start).getSpent());
+                        }
+                        totalBudget.setText(String.valueOf(sumOfBudget));
+                        totalSpent.setText(String.valueOf(sumOfSpent));
+                        totalRemains.setText(String.valueOf((sumOfBudget-sumOfSpent)));
+                    }else{
+                        budgetBillsArrayList = new ArrayList<>();
+                        adapter.updateRecyclerView(budgetBillsArrayList);
+
+                        totalBudget.setText(String.valueOf(0));
+                        totalSpent.setText(String.valueOf(0));
+                        totalRemains.setText(String.valueOf((0)));
+                    }
                 }
+
             }
         });
 
@@ -152,25 +171,28 @@ public class DayFragment extends Fragment implements UpdateBudgetTable{
         saveBudget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dayData.put(selectedDate,budgetBillsArrayList);
+                hashMap.put(selectedDate,budgetBillsArrayList);
                 Gson gson = new Gson();
-                String hashMapString = gson.toJson(dayData);
+                String hashMapString = gson.toJson(hashMap);
                 editor.putString("DayData", hashMapString);
                 editor.apply();
             }
         });
-        totalBudget = view.findViewById(R.id.budget_total);
-        totalSpent = view.findViewById(R.id.spents_total);
-        totalRemains = view.findViewById(R.id.remains_total);
-        int sumOfBudget = 0;
-        int sumOfSpent = 0;
-        for (int start=0;start<budgetBillsArrayList.size();start++){
-            sumOfBudget += Integer.parseInt(budgetBillsArrayList.get(start).getBudget());
-            sumOfSpent += Integer.parseInt(budgetBillsArrayList.get(start).getSpent());
+    }
+
+    private void getDayData(String selectedDate) {
+        Gson gson = new Gson();
+        String storedHashMapString = preferences.getString("DayData", "oopsDintWork");
+        if (!storedHashMapString.equals("oopsDintWork")){
+            java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>(){}.getType();
+            hashMap = gson.fromJson(storedHashMapString, type);
+            if (hashMap.get(selectedDate) != null) {
+                if (budgetBillsArrayList == null){
+                    budgetBillsArrayList = new ArrayList<>();
+                }
+                budgetBillsArrayList = hashMap.get(selectedDate);
+            }
         }
-        totalBudget.setText(String.valueOf(sumOfBudget));
-        totalSpent.setText(String.valueOf(sumOfSpent));
-        totalRemains.setText(String.valueOf((sumOfBudget-sumOfSpent)));
     }
 
 
@@ -180,6 +202,6 @@ public class DayFragment extends Fragment implements UpdateBudgetTable{
             budgetBillsArrayList = new ArrayList<>();
         }
         budgetBillsArrayList.add(budgetModel);
-        adapter.update(budgetModel);
+        adapter.update(budgetBillsArrayList);
     }
 }

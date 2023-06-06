@@ -20,9 +20,11 @@ import android.content.SharedPreferences;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pebuplan.adapter.MonthlyBudgetAdapter;
 import com.example.pebuplan.model.BudgetModel;
@@ -38,13 +40,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
-public class MonthlyBudgetFragment extends Fragment {
+public class MonthlyBudgetFragment extends Fragment implements UpdateBudgetTable {
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
 
     TextView months;
 
     ImageView forward, backward;
+
+    String incomeToSet;
+    Button save, incomeSave;
 
     RecyclerView budget_rec_view_month;
     ArrayList<BudgetModel> monthlyBillsArrayList = new ArrayList<>();
@@ -59,8 +64,9 @@ public class MonthlyBudgetFragment extends Fragment {
     int currentMonth;
     int currentDay;
     String selectedDate;
-    TextView totalBudget, totalSpent;
+    TextView totalBudget, totalSpent, totalRemains;
     HashMap<String, ArrayList<BudgetModel>> hashMap = new HashMap<>();
+    HashMap<Integer, String> incomeHashMap = new HashMap<>();
 
     public MonthlyBudgetFragment() {
 
@@ -75,51 +81,40 @@ public class MonthlyBudgetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View view = inflater.inflate(R.layout.fragment_year, container, false);
+        incomeInput = view.findViewById(R.id.incomeinput);
         preferences = getActivity().getSharedPreferences("plan", Context.MODE_PRIVATE);
         editor = preferences.edit();
 
+        totalBudget = view.findViewById(R.id.budget_total_month);
+        totalSpent = view.findViewById(R.id.spents_total_month);
+        totalRemains = view.findViewById(R.id.remains_total_month);
+        incomeSave = view.findViewById(R.id.incomeSave);
+        save = view.findViewById(R.id.saveMonth);
+
         currentYear = calendar.get(Calendar.YEAR);
-        currentMonth = calendar.get(Calendar.MONTH)+1;
-
+        currentMonth = calendar.get(Calendar.MONTH);
         Gson gson = new Gson();
-        String storedHashMapString = preferences.getString("DayData", "oopsDintWork");
-        if (!storedHashMapString.equals("oopsDintWork")){
-            java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>(){}.getType();
-            hashMap = gson.fromJson(storedHashMapString, type);
-            for (int start=1;start<=31;start++){
-                currentDay = start;
-                if (start/10 != 0 || start == 10) {
-                    if (currentMonth / 10 != 0 || currentMonth == 10){
-                        selectedDate = currentYear + "-" + currentMonth + "-" + start;
-                    }else {
-                        selectedDate = currentYear + "-" + "0" + currentMonth + "-" + start;
-                    }
-                }else{
-                    if (currentMonth / 10 != 0 || currentMonth == 10){
-                        selectedDate = currentYear + "-" + currentMonth + "-" + "0" + start;
-                    }else {
-                        selectedDate = currentYear + "-" + "0" + currentMonth + "-" + "0" + start;
-                    }
-                }
-                if (hashMap.get(selectedDate) != null) {
-                    if (monthlyBillsArrayList == null){
-                        monthlyBillsArrayList = new ArrayList<>();
-                    }
-                    monthlyBillsArrayList.addAll(hashMap.get(selectedDate));
-                }
-            }
-        }
+        setIncome(currentMonth);
 
-        int month = calendar.get(Calendar.MONTH);
-        int year = calendar.get(Calendar.YEAR);
         String[] monthNames = new DateFormatSymbols().getMonths();
-        View view = inflater.inflate(R.layout.fragment_year, container, false);
+
+        getCurrentMonthData(currentMonth);
+        int sumOfBudget = 0;
+        int sumOfSpent = 0;
+        for (int start = 0; start < monthlyBillsArrayList.size(); start++) {
+            sumOfBudget += Integer.parseInt(monthlyBillsArrayList.get(start).getBudget());
+            sumOfSpent += Integer.parseInt(monthlyBillsArrayList.get(start).getSpent());
+        }
+        totalBudget.setText(String.valueOf(sumOfBudget));
+        totalSpent.setText(String.valueOf(sumOfSpent));
+        totalRemains.setText(String.valueOf((sumOfBudget - sumOfSpent)));
 
         months = view.findViewById(R.id.timeline);
         backward = view.findViewById(R.id.backward_image);
         forward = view.findViewById(R.id.forward_image);
 
-        months.setText(monthNames[month]);
+        months.setText(monthNames[currentMonth]);
 
 
         backward.setOnClickListener(new View.OnClickListener() {
@@ -131,29 +126,28 @@ public class MonthlyBudgetFragment extends Fragment {
                 currentMonth = calendar.get(Calendar.MONTH);
                 String[] monthNames = new DateFormatSymbols().getMonths();
                 months.setText(monthNames[currentMonth]);
-                for (int start=1;start<=31;start++){
-                    currentDay = start;
-                    if (start/10 != 0 || start == 10) {
-                        if ((currentMonth+1) / 10 != 0 || (currentMonth+1) == 10){
-                            selectedDate = currentYear + "-" + (currentMonth+1) + "-" + start;
-                        }else {
-                            selectedDate = currentYear + "-" + "0" + (currentMonth+1) + "-" + start;
-                        }
-                    }else{
-                        if ((currentMonth-1) / 10 != 0 || (currentMonth-1) == 10){
-                            selectedDate = currentYear + "-" + (currentMonth+1) + "-" + "0" + start;
-                        }else {
-                            selectedDate = currentYear + "-" + "0" + (currentMonth+1) + "-" + "0" + start;
-                        }
+                selectedDate = monthNames[currentMonth];
+                getCurrentMonthData(currentMonth);
+                if (hashMap.get(selectedDate) != null) {
+                    if (monthlyBillsArrayList == null) {
+                        monthlyBillsArrayList = new ArrayList<>();
                     }
-                    if (hashMap.get(selectedDate) != null) {
-                        if (monthlyBillsArrayList == null){
-                            monthlyBillsArrayList = new ArrayList<>();
-                        }
-                        monthlyBillsArrayList.addAll(hashMap.get(selectedDate));
-                    }
+                    monthlyBillsArrayList = hashMap.get(selectedDate);
+                    adapter_month.updateRecyclerView(monthlyBillsArrayList);
+                } else {
+                    monthlyBillsArrayList = new ArrayList<>();
+                    adapter_month.updateRecyclerView(monthlyBillsArrayList);
                 }
-                adapter_month.updateRecyclerView(monthlyBillsArrayList);
+                int sumOfBudget = 0;
+                int sumOfSpent = 0;
+                for (int start = 0; start < monthlyBillsArrayList.size(); start++) {
+                    sumOfBudget += Integer.parseInt(monthlyBillsArrayList.get(start).getBudget());
+                    sumOfSpent += Integer.parseInt(monthlyBillsArrayList.get(start).getSpent());
+                }
+                totalBudget.setText(String.valueOf(sumOfBudget));
+                totalSpent.setText(String.valueOf(sumOfSpent));
+                totalRemains.setText(String.valueOf((sumOfBudget - sumOfSpent)));
+                setIncome(currentMonth);
             }
         });
 
@@ -166,44 +160,109 @@ public class MonthlyBudgetFragment extends Fragment {
                 currentMonth = calendar.get(Calendar.MONTH);
                 String[] monthNames = new DateFormatSymbols().getMonths();
                 months.setText(monthNames[currentMonth]);
-                for (int start=1;start<=31;start++){
-                    currentDay = start;
-                    if (start/10 != 0 || start == 10) {
-                        if ((currentMonth+1) / 10 != 0 || (currentMonth+1) == 10){
-                            selectedDate = currentYear + "-" + (currentMonth+1) + "-" + start;
-                        }else {
-                            selectedDate = currentYear + "-" + "0" + (currentMonth+1) + "-" + start;
-                        }
-                    }else{
-                        if ((currentMonth+1) / 10 != 0 || (currentMonth+1) == 10){
-                            selectedDate = currentYear + "-" + (currentMonth+1) + "-" + "0" + start;
-                        }else {
-                            selectedDate = currentYear + "-" + "0" + (currentMonth+1) + "-" + "0" + start;
-                        }
+                selectedDate = monthNames[currentMonth];
+                getCurrentMonthData(currentMonth);
+                if (hashMap.get(selectedDate) != null) {
+                    if (monthlyBillsArrayList == null) {
+                        monthlyBillsArrayList = new ArrayList<>();
                     }
-                    if (hashMap.get(selectedDate) != null) {
-                        if (monthlyBillsArrayList == null){
-                            monthlyBillsArrayList = new ArrayList<>();
-                        }
-                        monthlyBillsArrayList.addAll(hashMap.get(selectedDate));
-                    }
+                    monthlyBillsArrayList = hashMap.get(selectedDate);
+                    adapter_month.updateRecyclerView(monthlyBillsArrayList);
+                } else {
+                    monthlyBillsArrayList = new ArrayList<>();
+                    adapter_month.updateRecyclerView(monthlyBillsArrayList);
                 }
-                adapter_month.updateRecyclerView(monthlyBillsArrayList);
+                int sumOfBudget = 0;
+                int sumOfSpent = 0;
+                for (int start = 0; start < monthlyBillsArrayList.size(); start++) {
+                    sumOfBudget += Integer.parseInt(monthlyBillsArrayList.get(start).getBudget());
+                    sumOfSpent += Integer.parseInt(monthlyBillsArrayList.get(start).getSpent());
+                }
+                totalBudget.setText(String.valueOf(sumOfBudget));
+                totalSpent.setText(String.valueOf(sumOfSpent));
+                totalRemains.setText(String.valueOf((sumOfBudget - sumOfSpent)));
+                setIncome(currentMonth);
             }
         });
 
-        incomeInput = view.findViewById(R.id.incomeinput);
-        String income = incomeInput.getText().toString();
-        editor.putString("Income",income);
-        editor.commit();
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Gson gson = new Gson();
+                hashMap.put(selectedDate, monthlyBillsArrayList);
+                String hashMapString = gson.toJson(hashMap);
+                editor.putString("MonthData", hashMapString);
+                editor.apply();
+            }
+        });
+
+        incomeSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Gson gson = new Gson();
+                String incomeString = preferences.getString("Income", "IncomeNotFound");
+                if (!incomeString.equals("IncomeNotFound") && !incomeString.equals("")) {
+                    java.lang.reflect.Type typeIncome = new TypeToken<HashMap<Integer, String>>() {
+                    }.getType();
+                    incomeHashMap = gson.fromJson(incomeString, typeIncome);
+                }
+                String income = incomeInput.getText().toString();
+                if (!income.equals("")) {
+                    incomeHashMap.put(currentMonth, income);
+                    String hashmapIncome = gson.toJson(incomeHashMap);
+                    editor.putString("Income", hashmapIncome);
+                    editor.apply();
+                }
+            }
+        });
 
         return view;
+    }
+
+    private void getCurrentMonthData(int currentMonth) {
+        Gson gson = new Gson();
+        String[] monthNames = new DateFormatSymbols().getMonths();
+        String storedHashMapString = preferences.getString("MonthData", "oopsDintWork");
+        if (!storedHashMapString.equals("oopsDintWork")) {
+            java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<BudgetModel>>>() {
+            }.getType();
+            hashMap = gson.fromJson(storedHashMapString, type);
+
+            selectedDate = monthNames[currentMonth];
+            if (hashMap.get(selectedDate) != null) {
+                if (monthlyBillsArrayList == null) {
+                    monthlyBillsArrayList = new ArrayList<>();
+                }
+                monthlyBillsArrayList = hashMap.get(selectedDate);
+            }
+
+        }
+        if (monthlyBillsArrayList != null) {
+            save.setEnabled(true);
+        }
+    }
+
+    private void setIncome(int currentMonth) {
+        Gson gson = new Gson();
+        String incomeString = preferences.getString("Income", "IncomeNotFound");
+        if (!incomeString.equals("IncomeNotFound") && !incomeString.equals("")) {
+            java.lang.reflect.Type typeIncome = new TypeToken<HashMap<Integer, String>>() {
+            }.getType();
+            HashMap<Integer, String> incomeHash = gson.fromJson(incomeString, typeIncome);
+            incomeToSet = incomeHash.get(currentMonth);
+            if (incomeToSet == null) {
+                incomeInput.setText("");
+                incomeInput.setHint("Income");
+            } else {
+                incomeInput.setText(incomeToSet);
+            }
+        }
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (monthlyBillsArrayList == null){
+        if (monthlyBillsArrayList == null) {
             monthlyBillsArrayList = new ArrayList<>();
         }
         adapter_month = new MonthlyBudgetAdapter(monthlyBillsArrayList);
@@ -211,15 +270,24 @@ public class MonthlyBudgetFragment extends Fragment {
         budget_rec_view_month.setLayoutManager(new LinearLayoutManager(requireContext()));
         budget_rec_view_month.setAdapter(adapter_month);
 
-        totalBudget = view.findViewById(R.id.budget_total_month);
-        totalSpent = view.findViewById(R.id.spents_total_month);
-        int sumOfBudget = 0;
-        int sumOfSpent = 0;
-        for (int start=0;start<monthlyBillsArrayList.size();start++){
-            sumOfBudget += Integer.parseInt(monthlyBillsArrayList.get(start).getBudget());
-            sumOfSpent += Integer.parseInt(monthlyBillsArrayList.get(start).getSpent());
+        fab_month = view.findViewById(R.id.fab_month);
+
+        fab_month.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BudgetCustomDialog cd = new BudgetCustomDialog(requireActivity(), MonthlyBudgetFragment.this);
+                cd.show();
+            }
+        });
+    }
+
+    @Override
+    public void update(BudgetModel budgetModel) {
+        if (monthlyBillsArrayList == null) {
+            monthlyBillsArrayList = new ArrayList<>();
         }
-        totalBudget.setText(String.valueOf(sumOfBudget));
-        totalSpent.setText(String.valueOf(sumOfSpent));
+        monthlyBillsArrayList.add(budgetModel);
+        adapter_month.update(monthlyBillsArrayList);
+        save.setEnabled(true);
     }
 }

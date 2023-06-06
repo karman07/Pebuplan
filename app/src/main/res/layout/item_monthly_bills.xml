@@ -1,54 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_day_table"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/calendarView">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="100dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="180dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="235dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="290dp" />
 
         <TextView
             android:id="@+id/category_bill"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Categories"
-            app:layout_constraintEnd_toStartOf="@id/amount"
+            android:background="@drawable/monthly_bills_table_bg"
+            android:gravity="center"
+            android:padding="6dp"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline1"/>
 
-        <TextView
+        <EditText
             android:id="@+id/amount"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Amount"
-            app:layout_constraintTop_toTopOf="@id/category_bill"
-            app:layout_constraintStart_toEndOf="@id/category_bill"
-            app:layout_constraintEnd_toStartOf="@id/pay"/>
+            android:background="@drawable/monthly_bills_table_bg"
+            android:gravity="center"
+            android:padding="6dp"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintEnd_toStartOf="@id/guideline2"/>
 
-        <TextView
+        <EditText
             android:id="@+id/pay"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Pay"
-            app:layout_constraintEnd_toStartOf="@id/debt"
-            app:layout_constraintTop_toTopOf="@id/amount"
-            app:layout_constraintStart_toEndOf="@id/amount"/>
+            android:background="@drawable/monthly_bills_table_bg"
+            android:gravity="center"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:padding="6dp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline2"
+            app:layout_constraintEnd_toStartOf="@id/guideline3"/>
 
         <TextView
-            android:id="@+id/debt"
-            android:layout_width="wrap_content"
+            android:id="@+id/dept"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Debt"
-            app:layout_constraintEnd_toStartOf="@id/status"
-            app:layout_constraintStart_toEndOf="@id/pay"
-            app:layout_constraintTop_toTopOf="@id/pay"/>
+            android:background="@drawable/monthly_bills_table_bg"
+            android:gravity="center"
+            android:padding="6dp"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline3"
+            app:layout_constraintEnd_toStartOf="@id/guideline4"/>
 
         <TextView
             android:id="@+id/status"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Status"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/debt"
-            app:layout_constraintStart_toEndOf="@id/debt"/>
+            android:background="@drawable/monthly_bills_table_bg"
+            android:gravity="center"
+            android:padding="6dp"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline4"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pebuplan.R;
-import com.example.pebuplan.model.BudgetModel;
 import com.example.pebuplan.model.MonthlyBillModel;
 
 import java.util.ArrayList;
@@ -22,13 +21,13 @@ public class MonthlyBillAdapter extends RecyclerView.Adapter<MonthlyBillAdapter.
 
     ArrayList<MonthlyBillModel> monthlyBillList;
     UpdateList updateList;
-    public MonthlyBillAdapter(ArrayList<MonthlyBillModel> monthlyBill, UpdateList updateList){
+    public MonthlyBillAdapter(ArrayList<MonthlyBillModel> monthlyBill){
         if (monthlyBill.isEmpty()){
             monthlyBillList = new ArrayList<>();
         }else{
             monthlyBillList = monthlyBill;
         }
-        this.updateList = updateList;
+//        this.updateList = updateList;
     }
     @NonNull
     @Override
@@ -44,25 +43,7 @@ public class MonthlyBillAdapter extends RecyclerView.Adapter<MonthlyBillAdapter.
         holder.pay.setText(monthlyBillList.get(position).getPay());
         holder.debt.setText(monthlyBillList.get(position).getDebt());
         holder.status.setText(monthlyBillList.get(position).getStatus());
-        /*holder.category.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String txt_category = holder.category.getText().toString();
-                MonthlyBillModel bill = monthlyBillList.get(holder.getAdapterPosition());
-                bill.setCategory(txt_category);
-                updateList.updateList(bill, position);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
         holder.amount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -73,8 +54,7 @@ public class MonthlyBillAdapter extends RecyclerView.Adapter<MonthlyBillAdapter.
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String txt_amount = holder.amount.getText().toString();
                 MonthlyBillModel bill = monthlyBillList.get(holder.getAdapterPosition());
-                bill.setCategory(txt_amount);
-                updateList.updateList(bill, position);
+                bill.setAmount(txt_amount);
             }
 
             @Override
@@ -93,8 +73,8 @@ public class MonthlyBillAdapter extends RecyclerView.Adapter<MonthlyBillAdapter.
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String txt_pay = holder.pay.getText().toString();
                 MonthlyBillModel bill = monthlyBillList.get(holder.getAdapterPosition());
-                bill.setCategory(txt_pay);
-                updateList.updateList(bill, position);
+                bill.setPay(txt_pay);
+
             }
 
             @Override
@@ -102,44 +82,13 @@ public class MonthlyBillAdapter extends RecyclerView.Adapter<MonthlyBillAdapter.
 
             }
         });
-        holder.debt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String txt_debt = holder.debt.getText().toString();
-                MonthlyBillModel bill = monthlyBillList.get(holder.getAdapterPosition());
-                bill.setCategory(txt_debt);
-                updateList.updateList(bill, position);
-            }
+        int debt = Integer.parseInt(holder.amount.getText().toString()) - Integer.parseInt(holder.pay.getText().toString());
+        holder.debt.setText(String.valueOf(debt));
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        holder.status.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String txt_status = holder.status.getText().toString();
-                MonthlyBillModel bill = monthlyBillList.get(holder.getAdapterPosition());
-                bill.setCategory(txt_status);
-                updateList.updateList(bill, position);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });*/
+        String status = (debt == 0) ? "Paid" : "Unpaid";
+        holder.status.setText(status);
     }
 
     @Override
@@ -147,19 +96,20 @@ public class MonthlyBillAdapter extends RecyclerView.Adapter<MonthlyBillAdapter.
         return monthlyBillList.size();
     }
 
-    public void update(MonthlyBillModel newData){
-        monthlyBillList.add(newData);
+    public void update(ArrayList<MonthlyBillModel> billsList){
+        this.monthlyBillList = billsList;
         notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView category, amount, pay, debt, status;
+        EditText  amount, pay;
+        TextView category, debt, status;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             category = itemView.findViewById(R.id.category_bill);
             amount = itemView.findViewById(R.id.amount);
-            debt = itemView.findViewById(R.id.debt);
+            debt = itemView.findViewById(R.id.dept);
             pay = itemView.findViewById(R.id.pay);
             status = itemView.findViewById(R.id.status);
         }
